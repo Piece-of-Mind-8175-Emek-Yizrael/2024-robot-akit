@@ -40,9 +40,9 @@ import org.littletonrobotics.junction.Logger;
 
 public class Drive extends SubsystemBase {
   private final DriveIO io;
-  private final DriveIOInputsAutoLogged inputs = new DriveIOInputsAutoLogged();
+  // private final DriveIOInputsAutoLogged inputs = new DriveIOInputsAutoLogged();
   private final GyroIO gyroIO;
-  private final GyroIOInputsAutoLogged gyroInputs = new GyroIOInputsAutoLogged();
+  // private final GyroIOInputsAutoLogged gyroInputs = new GyroIOInputsAutoLogged();
 
   private final DifferentialDriveKinematics kinematics =
       new DifferentialDriveKinematics(trackWidth);
@@ -97,29 +97,29 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
-    io.updateInputs(inputs);
-    gyroIO.updateInputs(gyroInputs);
-    Logger.processInputs("Drive", inputs);
-    Logger.processInputs("Drive/Gyro", inputs);
+  //   io.updateInputs(inputs);
+  //   gyroIO.updateInputs(gyroInputs);
+  //   Logger.processInputs("Drive", inputs);
+  //   Logger.processInputs("Drive/Gyro", inputs);
 
-    // Update gyro angle
-    if (gyroInputs.connected) {
-      // Use the real gyro angle
-      rawGyroRotation = gyroInputs.yawPosition;
-    } else {
-      // Use the angle delta from the kinematics and module deltas
-      Twist2d twist =
-          kinematics.toTwist2d(
-              getLeftPositionMeters() - lastLeftPositionMeters,
-              getRightPositionMeters() - lastRightPositionMeters);
-      rawGyroRotation = rawGyroRotation.plus(new Rotation2d(twist.dtheta));
-      lastLeftPositionMeters = getLeftPositionMeters();
-      lastRightPositionMeters = getRightPositionMeters();
-    }
+  //   // Update gyro angle
+  //   if (gyroInputs.connected) {
+  //     // Use the real gyro angle
+  //     rawGyroRotation = gyroInputs.yawPosition;
+  //   } else {
+  //     // Use the angle delta from the kinematics and module deltas
+  //     Twist2d twist =
+  //         kinematics.toTwist2d(
+  //             getLeftPositionMeters() - lastLeftPositionMeters,
+  //             getRightPositionMeters() - lastRightPositionMeters);
+  //     rawGyroRotation = rawGyroRotation.plus(new Rotation2d(twist.dtheta));
+  //     lastLeftPositionMeters = getLeftPositionMeters();
+  //     lastRightPositionMeters = getRightPositionMeters();
+  //   }
 
-    // Update odometry
-    poseEstimator.update(rawGyroRotation, getLeftPositionMeters(), getRightPositionMeters());
-  }
+  //   // Update odometry
+  //   poseEstimator.update(rawGyroRotation, getLeftPositionMeters(), getRightPositionMeters());
+   }
 
   /** Runs the drive at the desired velocity. */
   public void runClosedLoop(ChassisSpeeds speeds) {
@@ -173,7 +173,8 @@ public class Drive extends SubsystemBase {
   /** Resets the current odometry pose. */
   public void setPose(Pose2d pose) {
     poseEstimator.resetPosition(
-        rawGyroRotation, getLeftPositionMeters(), getRightPositionMeters(), pose);
+        // rawGyroRotation, getLeftPositionMeters(), getRightPositionMeters(), pose);
+        rawGyroRotation, 0, 0, pose);
   }
 
   /**
@@ -189,29 +190,32 @@ public class Drive extends SubsystemBase {
   /** Returns the position of the left wheels in meters. */
   @AutoLogOutput
   public double getLeftPositionMeters() {
-    return inputs.leftPositionRad * wheelRadiusMeters;
+    return 0;
   }
 
-  /** Returns the position of the right wheels in meters. */
-  @AutoLogOutput
-  public double getRightPositionMeters() {
-    return inputs.rightPositionRad * wheelRadiusMeters;
-  }
+  // /** Returns the position of the right wheels in meters. */
+  // @AutoLogOutput
+  // public double getRightPositionMeters() {
+  //   return inputs.rightPositionRad * wheelRadiusMeters;
+  // }
 
   /** Returns the velocity of the left wheels in meters/second. */
   @AutoLogOutput
   public double getLeftVelocityMetersPerSec() {
-    return inputs.leftVelocityRadPerSec * wheelRadiusMeters;
+    // return inputs.leftVelocityRadPerSec * wheelRadiusMeters;
+    return 0;
   }
 
   /** Returns the velocity of the right wheels in meters/second. */
   @AutoLogOutput
   public double getRightVelocityMetersPerSec() {
-    return inputs.rightVelocityRadPerSec * wheelRadiusMeters;
+    // return inputs.rightVelocityRadPerSec * wheelRadiusMeters;
+    return 0;
   }
 
   /** Returns the average velocity in radians/second. */
   public double getCharacterizationVelocity() {
-    return (inputs.leftVelocityRadPerSec + inputs.rightVelocityRadPerSec) / 2.0;
+    // return (inputs.leftVelocityRadPerSec + inputs.rightVelocityRadPerSec) / 2.0;
+    return 0;
   }
 }
