@@ -13,7 +13,6 @@
 
 package frc.robot.Commands;
 
-import static frc.robot.Subsystems.drive.DriveConstants.maxSpeedMetersPerSec;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Timer;
@@ -49,8 +48,8 @@ public class DriveCommands {
           var speeds = DifferentialDrive.arcadeDriveIK(x, z, true);
 
           // Apply output
-          drive.runClosedLoop(
-              speeds.left * maxSpeedMetersPerSec, speeds.right * maxSpeedMetersPerSec);
+          drive.runOpenLoop(
+              speeds.left * 12, speeds.right * 12);
         },
         drive);
   }
