@@ -1,0 +1,6 @@
+package frc.robot.Subsystems.shooter;
+
+public class ShooterConstants {
+    public static final int RIGHT_ID = 0;
+    public static final int LEFT_ID = 1;
+}
