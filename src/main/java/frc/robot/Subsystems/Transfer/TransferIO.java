@@ -1,10 +1,14 @@
-package frc.robot.Subsystems.NoteIntake;
+package frc.robot.Subsystems.Transfer;
 
-public interface NoteIntakeIO {
-    
-    public static class NoteIntakeIOInputs {
+public interface TransferIO {
+
+    public static class TransferIOInputs {
         public double speed;
         public double voltage;
+    
+    }
+
+    public default void updateInputs(TransferIOInputs inputs) {
     }
 
     public default void setSpeed(double speed) {
@@ -15,7 +19,5 @@ public interface NoteIntakeIO {
 
     public default void stopMotor() {
     }
-
-    public default void updateInputs(NoteIntakeIOInputs inputs) {
-    }
+    
 }
