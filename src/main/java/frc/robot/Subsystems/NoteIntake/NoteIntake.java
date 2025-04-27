@@ -2,11 +2,10 @@ package frc.robot.Subsystems.NoteIntake;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
 public class NoteIntake extends SubsystemBase {
 
     private final NoteIntakeIO noteIntakeIO;
-    // private final NoteIntakeIOAutoLogged noteIntakeInputs = new NoteIntakeIOAutoLogged();
+    private final NoteIntakeIOAutoLogged noteIntakeInputs = new NoteIntakeIOAutoLogged();
 
     public NoteIntake(NoteIntakeIO noteIntakeIO) {
         this.noteIntakeIO = noteIntakeIO;
