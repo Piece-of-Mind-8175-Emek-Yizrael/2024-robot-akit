@@ -12,5 +12,6 @@ public interface ShooterIO {
     public default void updateInputs(ShooterIOInputs inputs) {}
 
     public default void setSpeed(double speed) {}
+    public default void stopMotor() {}
     
 }

@@ -4,13 +4,13 @@ import static frc.robot.Subsystems.shooter.ShooterConstants.LEFT_ID;
 import static frc.robot.Subsystems.shooter.ShooterConstants.RIGHT_ID;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+// import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkMax;
 
 
 public class ShooterIOReal implements ShooterIO {
     private final SparkMax leftMotor = new SparkMax(RIGHT_ID, MotorType.kBrushless);
     private final SparkMax rightMotor = new SparkMax(LEFT_ID, MotorType.kBrushless);
-
 
     @Override
     public void updateInputs(ShooterIOInputs inputs) {
@@ -24,5 +24,10 @@ public class ShooterIOReal implements ShooterIO {
         rightMotor.set(speed);
     }
 
+    @Override
+    public void stopMotor() {
+        leftMotor.stopMotor();
+        rightMotor.stopMotor();
+    }
 
 }
