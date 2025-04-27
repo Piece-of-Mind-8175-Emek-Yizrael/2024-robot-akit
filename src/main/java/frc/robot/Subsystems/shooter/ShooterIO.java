@@ -4,13 +4,16 @@ import org.littletonrobotics.junction.AutoLog;
 
 public interface ShooterIO {
     @AutoLog
-    public static class ShooterIOInputs {
-        public double RightVelocity;
-        public double LeftVelocity;
+    public static record ShooterIORecord(double leftPower, double rightPower, double leftVelocity, double rightVelocity) {
+
     }
 
-    public default void updateInputs(ShooterIOInputs inputs) {}
 
-    public default void setSpeed(double speed) {}
-    
+    public default void updateInputs(ShooterIORecord inputs) {}
+
+    public default void setVoltage(double voltage) {}
+    public default void setPower(double speed) {}
+
+    public default void setVelocity(double speed) {}
+
 }
