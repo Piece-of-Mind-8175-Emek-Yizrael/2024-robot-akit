@@ -17,7 +17,6 @@ public interface ShootIO {
     public default void setVoltage(double voltage){}
     public default void setGoal(double goal){}
     public default BooleanSupplier atGoal() { return () -> false; }
-    public default void resetlfPressed(){}
     public default void setPidValues(){}
     public default double getSpeed(){ return 0; }
 }

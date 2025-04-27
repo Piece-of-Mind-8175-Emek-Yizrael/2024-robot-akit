@@ -1,22 +1,27 @@
 package frc.robot.Subsystems.shoot;
 
+import java.util.function.BooleanSupplier;
+
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-import frc.robot.POM_lib.Motors.POMMotor;
+import static frc.robot.Subsystems.shoot.ShootingConstants.*;
 
-import com.revrobotics.spark.SparkBase;
-import com.revrobotics.spark.SparkMax;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
 public class ShootSparkMax implements ShootIO{
     private SparkMax upperMotor = new SparkMax(0, MotorType.kBrushless);
     private SparkMax downMotor = new SparkMax(0, MotorType.kBrushless);
+    private ProfiledPIDController pidController;
 
     public ShootSparkMax(){
         SparkMaxConfig config = new SparkMaxConfig();
+        pidController = new ProfiledPIDController(KP,KI,KD,new TrapezoidProfile.Constraints(MAX_ACCELERATION,MAX_VALOCITY ));
 
-        config.idleMode(IdleMode.kBrake).follow(upperMotor, true)
+        config.idleMode(IdleMode.kCoast).follow(upperMotor, true)
                 .smartCurrentLimit(0)
                 .voltageCompensation(0);
    
@@ -40,6 +45,22 @@ public class ShootSparkMax implements ShootIO{
     @Override
     public double getSpeed() {
         return (upperMotor.getEncoder().getVelocity() + downMotor.getEncoder().getVelocity()) / 2;
+    }
+
+    @Override
+    public void setGoal(double goal) {
+        pidController.setGoal(goal);
+        setVoltage(pidController.calculate(getSpeed()));
+    }
+
+    @Override
+    public BooleanSupplier atGoal() {
+        
+    }
+
+    @Override
+    public void setPidValues() {
+        
     }
     
 }
