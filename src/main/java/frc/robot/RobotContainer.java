@@ -18,7 +18,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.Transfer.Transfer;
+import frc.robot.Subsystems.Transfer.TransferIOReal;
 import frc.robot.Subsystems.NoteIntake.NoteIntake;
+import frc.robot.Subsystems.NoteIntake.NoteIntakeIOReal;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Commands.TransferCommands;
 import frc.robot.Commands.NoteIntakeCommands;
@@ -51,9 +53,12 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   private RobotContainer() {
-    configureButtonBindings();
+    noteIntake = new NoteIntake(new NoteIntakeIOReal());
 
-    driverController.a().whileTrue(NoteIntakeCommands.Intake(noteIntake).andThen(TransferCommands.Transfer(transfer)));
+    transfer = new Transfer(new TransferIOReal());
+    
+    configureButtonBindings();
+    driverController.a().whileTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.Transfer(transfer)));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
 

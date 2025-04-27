@@ -8,10 +8,10 @@ public class NoteIntakeIOReal implements NoteIntakeIO {
     private final POMVictorSpx IntakeMotorTwo;
 
     public NoteIntakeIOReal() {
-        IntakeMotorOne = new POMVictorSpx(INTAKE_MOTOR_ONE_ID);
-        IntakeMotorTwo = new POMVictorSpx(INTAKE_MOTOR_TWO_ID);
+        IntakeMotorOne = new POMVictorSpx(INTAKE_MOTOR_RIGHT_ID);
+        IntakeMotorTwo = new POMVictorSpx(INTAKE_MOTOR_LEFT_ID);
         IntakeMotorOne.setInverted(false);
-        IntakeMotorTwo.setInverted(true);
+        IntakeMotorTwo.setInverted(false);
     }
 
     @Override

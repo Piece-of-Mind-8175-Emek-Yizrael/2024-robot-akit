@@ -1,7 +1,7 @@
 package frc.robot.Subsystems.NoteIntake;
 
 public interface NoteIntakeIO {
-    @AutoLog
+    //@AutoLog
     public static class NoteIntakeIOInputs {
         public double speed;
         public double voltage;

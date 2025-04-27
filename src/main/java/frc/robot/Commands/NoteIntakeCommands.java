@@ -7,6 +7,6 @@ import static frc.robot.Subsystems.NoteIntake.NoteIntakeConstants.*;
 
 public class NoteIntakeCommands extends Command {
     public static Command Intake(NoteIntake noteIntake) {
-        return noteIntake.runEnd(() -> noteIntake.setSpeed(INTAKE_MOTOR_SPEED), noteIntake::stopMotor);
+        return noteIntake.startEnd(() -> noteIntake.setSpeed(INTAKE_MOTOR_SPEED), noteIntake::stopMotor);
     }
 }

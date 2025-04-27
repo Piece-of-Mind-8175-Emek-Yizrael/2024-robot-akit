@@ -8,6 +8,6 @@ import frc.robot.Subsystems.Transfer.Transfer;
 
 public class TransferCommands extends Command {
     public static Command Transfer(Transfer transfer) {
-        return transfer.runEnd(() -> transfer.setSpeed(TRANSFER_MOTOR_SPEED), transfer::stopMotor);
+        return transfer.startEnd(() -> transfer.setSpeed(TRANSFER_MOTOR_SPEED), transfer::stopMotor);
     }
 }

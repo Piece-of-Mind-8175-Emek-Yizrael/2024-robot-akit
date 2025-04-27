@@ -14,6 +14,8 @@ public class TransferIOReal implements TransferIO {
     public TransferIOReal() {
     motor = new SparkMax(TRANSFER_MOTOR_ID, MotorType.kBrushless ); 
 
+    
+
     }
 
     @Override
