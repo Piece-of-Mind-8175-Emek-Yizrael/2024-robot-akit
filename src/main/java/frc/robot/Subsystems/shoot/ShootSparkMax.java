@@ -55,7 +55,7 @@ public class ShootSparkMax implements ShootIO{
 
     @Override
     public BooleanSupplier atGoal() {
-        
+        return () -> pidController.atGoal();   
     }
 
     @Override
