@@ -15,8 +15,9 @@ public interface ShootIO {
     public default void stopMotor(){}
     public default void setSpeed(double speed){}
     public default void setVoltage(double voltage){}
-    public default void setGoal(double goal){}
-    public default BooleanSupplier atGoal() { return () -> false; }
+    public default void setSetPoint(double goal){}
+    public default BooleanSupplier atSetPoint() { return () -> false; }
     public default void setPidValues(){}
     public default double getSpeed(){ return 0; }
+
 }
