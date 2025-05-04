@@ -5,5 +5,5 @@ public final class TransferConstants {
     public static final double TRANSFER_SENSOR_ID = 0;
     public static final double TRANSFER_MOTOR_SPEED = -0.25;
     public static final double REVERSE_TRANSFER_MOTOR_SPEED = 0.15;
-    public static final double TRANSFER_SHOOT_MOTOR_SPEED = -0.75;
+    public static final double TRANSFER_SHOOT_MOTOR_SPEED = -0.50;
 }
