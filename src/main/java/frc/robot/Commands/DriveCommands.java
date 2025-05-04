@@ -33,6 +33,7 @@ public class DriveCommands {
   private DriveCommands() {}
 
   /**
+   * 
    * Standard joystick drive, where X is the forward-backward axis (positive = forward) and Z is the
    * left-right axis (positive = counter-clockwise).
    */
@@ -41,8 +42,8 @@ public class DriveCommands {
     return Commands.run(
         () -> {
           // Apply deadband
-          double x = MathUtil.applyDeadband(xSupplier.getAsDouble(), DEADBAND);
-          double z = MathUtil.applyDeadband(zSupplier.getAsDouble(), DEADBAND);
+          double x = MathUtil.applyDeadband(xSupplier.getAsDouble()*0.7, DEADBAND);
+          double z = MathUtil.applyDeadband(zSupplier.getAsDouble()*0.7, DEADBAND);
 
           // Calculate speeds
           var speeds = DifferentialDrive.arcadeDriveIK(x, z, true);
