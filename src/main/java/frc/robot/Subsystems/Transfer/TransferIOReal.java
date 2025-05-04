@@ -39,6 +39,7 @@ public class TransferIOReal implements TransferIO {
         motor.stopMotor();
     }
 
+    @Override
     public boolean getTransferSensor() {
         return transferSensor.get();
     }

@@ -7,7 +7,7 @@ import frc.robot.Subsystems.Transfer.Transfer;
 
 public class TransferCommands extends Command {
     public static Command transfer(Transfer transfer) {
-        return transfer.startEnd(() -> transfer.setSpeed(TRANSFER_MOTOR_SPEED), transfer::stopMotor);
+        return transfer.startEnd(() -> transfer.setSpeed(TRANSFER_MOTOR_SPEED), transfer::stopMotor).until(()->transfer.getTransferSensor());
     }
     
     public static Command reverseTransfer(Transfer transfer) {

@@ -19,5 +19,9 @@ public interface TransferIO {
 
     public default void stopMotor() {
     }
+
+    public default boolean getTransferSensor(){
+        return false;
+    }
     
 }

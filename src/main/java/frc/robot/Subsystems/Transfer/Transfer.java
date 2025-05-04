@@ -31,5 +31,9 @@ public class Transfer extends SubsystemBase {
         transferIO.stopMotor();
     }
 
+    public boolean getTransferSensor() {
+        return transferIO.getTransferSensor();
+    }
+
     
 }

@@ -92,9 +92,8 @@ public class RobotContainer {
     operatorController.rightTrigger().whileTrue(ShooterCommands.startEndShoot(shooter, ShooterConstants.SPEED));
     operatorController.leftTrigger().whileTrue(TransferCommands.shoot(transfer));
     drive.setDefaultCommand(DriveCommands.arcadeDrive(drive, driverController::getLeftY, driverController::getRightX));
-    operatorController.a().whileTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.transfer(transfer)));
-    operatorController.a().onFalse(TransferCommands.reverseTransfer(transfer).withTimeout(0.25555));
-
+    operatorController.a().onTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.transfer(transfer)).until(()-> transfer.getTransferSensor()));
+    //operatorController.a().onFalse(TransferCommands.reverseTransfer(transfer).withTimeout(0.25555));
   }
 
   /**
