@@ -60,6 +60,7 @@ public class RobotContainer {
     configureButtonBindings();
     driverController.a().whileTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.Transfer(transfer)));
 
+    driverController.b().whileTrue(TransferCommands.ReverseTransfer(transfer));
     SmartDashboard.putData("Auto Mode", m_chooser);
 
     
