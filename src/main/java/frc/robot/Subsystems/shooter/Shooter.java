@@ -3,12 +3,15 @@ package frc.robot.Subsystems.shooter;
 import org.littletonrobotics.junction.Logger;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.lib.logfields.LogFieldsTable;
 import frc.robot.Subsystems.shooter.ShooterIO.ShooterIOInputs;
 
 
 public class Shooter extends SubsystemBase {
     public final ShooterIO shooterIO;
     public final ShooterIOInputs inputs = new ShooterIO.ShooterIOInputs();
+
+    LogFieldsTable fieldsTable = new LogFieldsTable(getName());
 
     public Shooter(ShooterIO shooterIO) {
         this.shooterIO = shooterIO;
