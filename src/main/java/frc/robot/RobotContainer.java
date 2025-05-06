@@ -18,13 +18,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Commands.DriveCommands;
-import frc.robot.Commands.ShooterCommands;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Subsystems.drive.Drive;
 import frc.robot.Subsystems.drive.DriveIOTalonSRX;
-import frc.robot.Subsystems.shooter.Shooter;
-import frc.robot.Subsystems.shooter.ShooterIOReal;
-import frc.robot.Subsystems.shooter.ShooterConstants;
 import frc.robot.Subsystems.Transfer.Transfer;
 import frc.robot.Subsystems.Transfer.TransferIOReal;
 import frc.robot.Subsystems.NoteIntake.NoteIntake;
@@ -53,7 +49,6 @@ public class RobotContainer {
   
   private final PomXboxController driverController = new PomXboxController(0);
   private final PomXboxController operatorController = new PomXboxController(1);
-  private final Shooter shooter;
   private final Drive drive;
 
   private Transfer transfer;
@@ -65,7 +60,6 @@ public class RobotContainer {
    */
   private RobotContainer() {
     noteIntake = new NoteIntake(new NoteIntakeIOReal());
-    shooter  = new Shooter(new ShooterIOReal());
     drive = new Drive(new DriveIOTalonSRX(), null);
     transfer = new Transfer(new TransferIOReal());
     
@@ -89,7 +83,6 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    operatorController.rightTrigger().whileTrue(ShooterCommands.startEndShoot(shooter, ShooterConstants.SPEED));
     operatorController.leftTrigger().whileTrue(TransferCommands.shoot(transfer));
     drive.setDefaultCommand(DriveCommands.arcadeDrive(drive, driverController::getLeftY, driverController::getRightX));
     operatorController.a().onTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.transfer(transfer)).until(()-> transfer.getTransferSensor()));

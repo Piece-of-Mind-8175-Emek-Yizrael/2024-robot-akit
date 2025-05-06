@@ -1,17 +1,18 @@
-package frc.robot.Subsystems.shooter;
-
-import org.littletonrobotics.junction.AutoLog;
+package frc.robot.Subsystems.Shooter;
 
 public interface ShooterIO {
-    @AutoLog
+
     public static class ShooterIOInputs {
-        public double RightVelocity;
-        public double LeftVelocity;
+        public double speed;
+        public double voltage;
     }
 
-    public default void updateInputs(ShooterIOInputs inputs) {}
+    void updateInputs(ShooterIOInputs inputs);
 
-    public default void setSpeed(double speed) {}
-    public default void stopMotor() {}
+    void setSpeed(double speed);
+
+    void setVoltage(double voltage);
+
+    void stopMotor();
     
 }

@@ -1,45 +1,38 @@
-package frc.robot.Subsystems.shooter;
-
-import static frc.robot.Subsystems.shooter.ShooterConstants.LEFT_ID;
-import static frc.robot.Subsystems.shooter.ShooterConstants.RIGHT_ID;
-
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-// import com.revrobotics.spark.config.SparkMaxConfig;
+package frc.robot.Subsystems.Shooter;
 import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.SparkBaseConfig;
-import com.revrobotics.spark.config.SparkMaxConfig;
 
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-public class ShooterIOReal implements ShooterIO {
-    private final SparkMax leftMotor = new SparkMax(RIGHT_ID, MotorType.kBrushless);
-    private final SparkMax rightMotor = new SparkMax(LEFT_ID, MotorType.kBrushless);
+import frc.robot.POM_lib.sensors.POMDigitalInput;
 
-
-
-    public ShooterIOReal() {
-        SparkBaseConfig config = new SparkMaxConfig().inverted(true);
-        leftMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    }
-
-    @Override
-    public void updateInputs(ShooterIOInputs inputs) {
-        inputs.LeftVelocity = leftMotor.getEncoder().getVelocity();
-        inputs.RightVelocity = rightMotor.getEncoder().getVelocity();
-
-    }
-
-    @Override
-    public void setSpeed(double speed) {
-        leftMotor.set(speed);
-        rightMotor.set(speed);
-    }
-
-    @Override
-    public void stopMotor() {
-        leftMotor.stopMotor();
-        rightMotor.stopMotor();
-    }
-
+    public class ShooterIOReal implements ShooterIO {
+        private final POMDigitalInput transferSensor = new POMDigitalInput(0);
+        private final SparkMax motor;
+    
+        public ShooterIOReal() {
+        motor = new SparkMax(0, MotorType.kBrushless ); 
+    
+        }
+    
+        @Override
+        public void updateInputs(ShooterIOInputs inputs) {
+            inputs.speed = motor.get();
+            inputs.voltage = motor.getBusVoltage();
+        }
+    
+        @Override
+        public void setSpeed(double speed) {
+            motor.set(speed);
+        }
+    
+        @Override
+        public void setVoltage(double voltage) {
+            motor.setVoltage(voltage);
+        }
+    
+        @Override
+        public void stopMotor() {
+            motor.stopMotor();
+        }
+    
 }
