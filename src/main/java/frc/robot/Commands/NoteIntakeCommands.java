@@ -9,4 +9,10 @@ public class NoteIntakeCommands extends Command {
     public static Command Intake(NoteIntake noteIntake) {
         return noteIntake.startEnd(() -> noteIntake.setSpeed(INTAKE_MOTOR_SPEED), noteIntake::stopMotor);
     }
+
+    public static Command stop(NoteIntake noteIntake) {
+        return noteIntake.run(() -> noteIntake.stopMotor());
+    }
+
+    
 }

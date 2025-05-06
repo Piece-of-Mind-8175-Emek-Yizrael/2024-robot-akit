@@ -1,6 +1,7 @@
 package frc.robot.Commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.Subsystems.Transfer.Transfer;
 import frc.robot.Subsystems.shooter.Shooter;
 
 public class ShooterCommands {

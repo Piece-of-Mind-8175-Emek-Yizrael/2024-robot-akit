@@ -18,5 +18,9 @@ public class TransferCommands extends Command {
         return transfer.startEnd(() -> transfer.setSpeed(TRANSFER_SHOOT_MOTOR_SPEED), transfer::stopMotor);
     }
 
+    public static Command stop(Transfer transfer) {
+        return transfer.run(() -> transfer.stopMotor());
+    }
+
 
 }
