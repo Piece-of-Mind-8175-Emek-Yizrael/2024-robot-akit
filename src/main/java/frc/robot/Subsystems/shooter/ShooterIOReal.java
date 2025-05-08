@@ -17,7 +17,6 @@ public class ShooterIOReal implements ShooterIO {
     private final SparkMax rightMotor = new SparkMax(LEFT_ID, MotorType.kBrushless);
 
 
-
     public ShooterIOReal() {
         SparkBaseConfig config = new SparkMaxConfig().inverted(true);
         leftMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -42,4 +41,14 @@ public class ShooterIOReal implements ShooterIO {
         rightMotor.stopMotor();
     }
 
+    @Override
+    public double getLeftSpeed() {
+        return leftMotor.getEncoder().getVelocity();
+    }
+    
+    @Override
+    public double getRightSpeed() {
+        return rightMotor.getEncoder().getVelocity();
+    }
+    
 }

@@ -13,5 +13,7 @@ public interface ShooterIO {
 
     public default void setSpeed(double speed) {}
     public default void stopMotor() {}
+    public default double getLeftSpeed() {return 0;}
+    public default double getRightSpeed() {return 0;}
     
 }
