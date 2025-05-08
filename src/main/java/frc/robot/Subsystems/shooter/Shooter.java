@@ -13,23 +13,17 @@ public class Shooter extends SubsystemBase {
     private PIDController shootingPidController = new PIDController(KP, KI, KD);
     // :(
 
-
     public Shooter(ShooterIO shooterIO) {
         this.shooterIO = shooterIO;
     }
 
-    public void setSpeed(double speed) {
-        shooterIO.setSpeed(speed);
-    }
-
-    public void stopMotor() {
-        shooterIO.stopMotor();
+    public ShooterIO getIO() {
+        return this.shooterIO;
     }
 
     @Override
     public void periodic() {
         fieldsTable.recordOutput("Speed", shooterIO.getSpeed());
-
     }
 
 }

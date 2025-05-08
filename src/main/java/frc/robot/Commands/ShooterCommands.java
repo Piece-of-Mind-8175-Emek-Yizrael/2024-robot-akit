@@ -4,22 +4,12 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Subsystems.shooter.Shooter;
 
 public class ShooterCommands {
-    public static Command setSpeed(Shooter shooter, double speed) {
-        return Commands.runOnce(() -> {
-            shooter.setSpeed(speed);
-        }, shooter);
+    public static Command setSetPointCommand(Shooter shoot, double setPoint){
+        return Commands.run(() -> shoot.getIO().setSetPoint(setPoint), shoot).until(shoot.getIO().atSetPoint()).withName("setSetPointCommand: " + setPoint);
     }
 
-    public static Command stopShooter(Shooter shooter) {
-        return Commands.runOnce(() -> {
-            shooter.stopMotor();
-        }, shooter);
+    public static Command shootNote(Shooter shoot){
+        return Commands.startEnd(() -> shoot.getIO().setVoltage(1), () -> shoot.getIO().stopMotor(), shoot);
     }
 
-    public static Command startEndShoot(Shooter shooter, double speed) {
-        return Commands.startEnd(() -> shooter.setSpeed(speed), () -> shooter.stopMotor(), shooter);
-    }
-
-
-    
 }
