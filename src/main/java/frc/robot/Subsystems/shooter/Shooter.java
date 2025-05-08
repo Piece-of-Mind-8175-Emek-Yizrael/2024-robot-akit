@@ -1,13 +1,18 @@
 package frc.robot.Subsystems.shooter;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.logfields.LogFieldsTable;
+import static frc.robot.Subsystems.shooter.ShooterConstants.*;
 
 
 public class Shooter extends SubsystemBase {
     public final ShooterIO shooterIO;
 
     LogFieldsTable fieldsTable = new LogFieldsTable(getName());
+    private PIDController shootingPidController = new PIDController(KP, KI, KD);
+    // :(
+
 
     public Shooter(ShooterIO shooterIO) {
         this.shooterIO = shooterIO;
@@ -23,8 +28,8 @@ public class Shooter extends SubsystemBase {
 
     @Override
     public void periodic() {
-        fieldsTable.recordOutput("Left Speed", shooterIO.getLeftSpeed());
-        fieldsTable.recordOutput("Right Speed", shooterIO.getRightSpeed());
+        fieldsTable.recordOutput("Speed", shooterIO.getSpeed());
+
     }
 
 }
