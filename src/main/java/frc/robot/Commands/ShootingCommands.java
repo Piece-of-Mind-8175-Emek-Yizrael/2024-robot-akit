@@ -9,4 +9,8 @@ public class ShootingCommands {
     public static Command setSetPointCommand(Shoot shoot, double setPoint){
         return Commands.run(() -> shoot.getIO().setSetPoint(setPoint), shoot).until(shoot.getIO().atSetPoint()).withName("setSetPointCommand: " + setPoint);
     }
+
+    public static Command shootNote(Shoot shoot){
+        return Commands.startEnd(() -> shoot.getIO().setVoltage(1), () -> shoot.getIO().stopMotor(), shoot);
+    }
 }

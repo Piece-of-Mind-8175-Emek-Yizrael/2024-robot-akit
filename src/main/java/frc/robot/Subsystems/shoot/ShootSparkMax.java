@@ -23,8 +23,8 @@ import frc.lib.tuneables.TuneableBuilder;
 import frc.lib.tuneables.TuneablesManager;
 
 public class ShootSparkMax implements ShootIO, Tuneable{
-    private SparkMax upperMotor = new SparkMax(0, MotorType.kBrushless);
-    private SparkMax downMotor = new SparkMax(0, MotorType.kBrushless);
+    private SparkMax upperMotor = new SparkMax(5, MotorType.kBrushless);
+    private SparkMax downMotor = new SparkMax(6, MotorType.kBrushless);
     private PIDController pidController;
     private double maxInput = 12;
 
