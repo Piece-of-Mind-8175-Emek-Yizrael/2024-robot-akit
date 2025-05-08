@@ -1,5 +1,7 @@
 package frc.robot.Subsystems.Shooter;
 
+import java.util.function.BooleanSupplier;
+
 public interface ShooterIO {
 
     public static class ShooterIOInputs {
@@ -7,12 +9,20 @@ public interface ShooterIO {
         public double voltage;
     }
 
-    void updateInputs(ShooterIOInputs inputs);
+    public default void updateInputs(ShooterIOInputs inputs){}
 
-    void setSpeed(double speed);
+    public default void setSpeed(double speed){}
 
-    void setVoltage(double voltage);
+    public default void setVoltage(double voltage){}
 
-    void stopMotor();
+    public default void stopMotor(){}
+
+    public default void setSetPoint(double goal) {
+    }
+
+    public default BooleanSupplier atSetPoint(){
+        return () -> false;}
+
+    
     
 }
