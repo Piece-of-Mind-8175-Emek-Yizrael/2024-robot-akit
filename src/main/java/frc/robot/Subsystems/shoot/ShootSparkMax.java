@@ -61,7 +61,7 @@ public class ShootSparkMax implements ShootIO, Tuneable{
 
     @Override
     public double getSpeed() {
-        return (upperMotor.getEncoder().getVelocity() + downMotor.getEncoder().getVelocity()) / 2;
+        return (Math.abs(upperMotor.getEncoder().getVelocity()) + Math.abs(downMotor.getEncoder().getVelocity())) / 2;
     }
 
     @Override
