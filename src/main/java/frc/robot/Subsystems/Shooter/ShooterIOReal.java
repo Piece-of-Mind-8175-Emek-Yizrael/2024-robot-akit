@@ -26,6 +26,7 @@ public class ShooterIOReal implements ShooterIO {
             encoder = right_motor.getEncoder();
             config
             .idleMode(IdleMode.kCoast).follow(right_motor, true);
+            pidController.setTolerance(TOLERANCE);
             
             
         }
