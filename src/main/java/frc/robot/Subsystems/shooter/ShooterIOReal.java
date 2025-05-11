@@ -22,11 +22,11 @@ public class ShooterIOReal implements ShooterIO {
     private double maxInput = 12;
 
 
-
     public ShooterIOReal() {
-        SparkBaseConfig config = new SparkMaxConfig().inverted(true);
+        SparkBaseConfig config = new SparkMaxConfig().inverted(true).follow(rightMotor);
         leftMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         pidController = new PIDController(KP, KI, KD);
+        pidController.setTolerance(TOLERANCE);
     }
 
     @Override
@@ -60,8 +60,7 @@ public class ShooterIOReal implements ShooterIO {
     
     @Override
     public void setSetPoint(double goal) {
-        pidController.setSetpoint(goal);
-        setVoltage(pidController.calculate(getSpeed())*12);
+        setVoltage(pidController.calculate(getSpeed(), goal)*12);
     }
 
     @Override
