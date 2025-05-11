@@ -18,7 +18,7 @@ import frc.robot.Commands.ShootingCommands;
 
 public class Shoot extends SubsystemBase {
     private final LogFieldsTable fieldsTable = new LogFieldsTable(getName());
-    private final ShootIO io = Robot.isSimulation()? new ShootIO() {} : new ShootSparkMax(fieldsTable);
+    private final ShootIO io = Robot.isSimulation()? null : new ShootSparkMax(fieldsTable);
 
     private PIDController shootingPidController = new PIDController(KP, KI, KD);
 
@@ -35,6 +35,7 @@ public class Shoot extends SubsystemBase {
         SmartDashboard.putData("shoot 500 RPM command", ShootingCommands.setSetPointCommand(this, 500));
         SmartDashboard.putData("shoot 1000 RPM command", ShootingCommands.setSetPointCommand(this, 1000));
         SmartDashboard.putData("shoot 2000 RPM command", ShootingCommands.setSetPointCommand(this, 2000));
+        
     }
 
     public ShootIO getIO(){

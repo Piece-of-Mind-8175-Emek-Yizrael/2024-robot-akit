@@ -1,10 +1,6 @@
 package frc.robot.Subsystems.shoot;
 
-import static frc.robot.Subsystems.shoot.ShootingConstants.KD;
-import static frc.robot.Subsystems.shoot.ShootingConstants.KI;
-import static frc.robot.Subsystems.shoot.ShootingConstants.KP;
-import static frc.robot.Subsystems.shoot.ShootingConstants.MAX_ACCELERATION;
-import static frc.robot.Subsystems.shoot.ShootingConstants.MAX_VALOCITY;
+import static frc.robot.Subsystems.shoot.ShootingConstants.*;
 
 import java.util.function.BooleanSupplier;
 
@@ -22,7 +18,7 @@ import frc.lib.tuneables.Tuneable;
 import frc.lib.tuneables.TuneableBuilder;
 import frc.lib.tuneables.TuneablesManager;
 
-public class ShootSparkMax implements ShootIO, Tuneable{
+public class ShootSparkMax extends ShootIO implements Tuneable {
     private SparkMax upperMotor = new SparkMax(5, MotorType.kBrushless);
     private SparkMax downMotor = new SparkMax(6, MotorType.kBrushless);
     private PIDController pidController;
@@ -30,12 +26,14 @@ public class ShootSparkMax implements ShootIO, Tuneable{
 
 
     public ShootSparkMax(LogFieldsTable fieldsTable){
+        super(fieldsTable);
         SparkMaxConfig config = new SparkMaxConfig();
         pidController = new PIDController(KP,KI,KD);
 
         config.idleMode(IdleMode.kCoast).follow(upperMotor, true)
                 .smartCurrentLimit(0)
                 .voltageCompensation(0);
+        pidController.setTolerance(TOLERANCE);
         TuneablesManager.add("Shoot", (Tuneable) this);
    
     }

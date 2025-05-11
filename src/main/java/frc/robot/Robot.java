@@ -80,6 +80,7 @@ public class Robot extends LoggedRobot {
         initializeAdvantageKit();
         enableLiveWindowInTest(false);
         robotContainer = RobotContainer.getInstance();
+        TuneablesManager.enable();
     }
 
     @Override

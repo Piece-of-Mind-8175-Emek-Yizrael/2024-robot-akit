@@ -12,11 +12,14 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import frc.lib.tuneables.TuneablesManager;
 import frc.robot.Commands.ShootingCommands;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Subsystems.shoot.Shoot;
@@ -47,6 +50,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   private RobotContainer() {
+    SmartDashboard.putData("start tune", Commands.runOnce(TuneablesManager::enable));
     configureButtonBindings();
 
     SmartDashboard.putData("Auto Mode", m_chooser);
@@ -66,7 +70,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    opperatorController.rightTrigger().whileTrue(ShootingCommands.shootNote(shoot));
+    opperatorController.y().whileTrue(ShootingCommands.shootNote(shoot));
     opperatorController.x().onTrue(ShootingCommands.setSetPointCommand(shoot, 10));
   }
 
