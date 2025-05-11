@@ -22,6 +22,8 @@ import frc.robot.Subsystems.GroundCollect_yanir.GroundCollectCommand;
 import frc.robot.Subsystems.shooter_yanir.shooterCommand;
 import frc.robot.Subsystems.shooter_yanir.shooterSubsystem;
 import frc.robot.Subsystems.GroundCollect_yanir.GroundCollectSubsystem;
+import frc.robot.Subsystems.Transfer_yanir.TransferCommand;
+import frc.robot.Subsystems.Transfer_yanir.TransferSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -48,7 +50,7 @@ public class RobotContainer {
   private final GroundCollectSubsystem groundCollectSubsystem;
   // private Transfer transfer;
   // private NoteIntake noteIntake;
-  
+  private final TransferSubsystem transferSubsystem;
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -89,6 +91,7 @@ public class RobotContainer {
    // operatorController.x().onFalse(new shooterCommand(shooterSubsystem, 0));
     operatorController.a().whileTrue(new GroundCollectCommand(0.6, groundCollectSubsystem));
     // operatorController.a().whileFalse(new GroundCollectCommand(0, groundCollectSubsystem));
+    operatorController.y().whileTrue(new TransferCommand(5, transferSubsystem));
   }
 
   /**
