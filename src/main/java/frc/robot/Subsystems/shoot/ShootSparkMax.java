@@ -1,18 +1,20 @@
 package frc.robot.Subsystems.shoot;
 
-import static frc.robot.Subsystems.shoot.ShootingConstants.*;
+import static frc.robot.Subsystems.shoot.ShootingConstants.KD;
+import static frc.robot.Subsystems.shoot.ShootingConstants.KI;
+import static frc.robot.Subsystems.shoot.ShootingConstants.KP;
+import static frc.robot.Subsystems.shoot.ShootingConstants.TOLERANCE;
 
 import java.util.function.BooleanSupplier;
 
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.DriverStation;
 import frc.lib.logfields.LogFieldsTable;
 import frc.lib.tuneables.Tuneable;
 import frc.lib.tuneables.TuneableBuilder;
@@ -31,8 +33,9 @@ public class ShootSparkMax extends ShootIO implements Tuneable {
         pidController = new PIDController(KP,KI,KD);
 
         config.idleMode(IdleMode.kCoast).follow(upperMotor, true)
-                .smartCurrentLimit(0)
-                .voltageCompensation(0);
+                .smartCurrentLimit(40)
+                .voltageCompensation(12);
+        downMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         pidController.setTolerance(TOLERANCE);
         TuneablesManager.add("Shoot", (Tuneable) this);
    
