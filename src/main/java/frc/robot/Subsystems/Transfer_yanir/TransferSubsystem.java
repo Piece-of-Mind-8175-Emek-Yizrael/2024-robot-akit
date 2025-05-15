@@ -1,5 +1,6 @@
 package frc.robot.Subsystems.Transfer_yanir;
 
+import com.ctre.phoenix6.signals.InvertedValue;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
@@ -13,12 +14,12 @@ public class TransferSubsystem extends SubsystemBase {
     static POMDigitalInput digitalInput;
     
     public TransferSubsystem(){
-        transferMotor = new SparkMax(7, MotorType.kBrushless);
+        transferMotor = new SparkMax(8, MotorType.kBrushless);
         digitalInput = new POMDigitalInput(0);
     }
 
     public void SetMotorVoltage(double voltage){
-        transferMotor.setVoltage(voltage);
+        transferMotor.setVoltage(-voltage);
     }
 
     public void stopMotor(){

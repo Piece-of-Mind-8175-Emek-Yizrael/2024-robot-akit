@@ -25,12 +25,4 @@ public class GroundCollectCommand extends Command {
     }
 
 
-    @Override
-    public boolean isFinished(){
-        if (GroundCollectSubsystem.isRingLoaded()) {
-            return true;
-        }else{
-            return false;
-        }
-    }
 }

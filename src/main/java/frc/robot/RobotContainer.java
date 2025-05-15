@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Subsystems.GroundCollect_yanir.GroundCollectCommand;
 import frc.robot.Subsystems.shooter_yanir.shooterCommand;
@@ -61,6 +63,7 @@ public class RobotContainer {
     //drive = new Drive(new DriveIOTalonSRX(), null);
     //transfer = new Transfer(new TransferIOReal());
     shooterSubsystem = new shooterSubsystem();
+    transferSubsystem = new TransferSubsystem();
     configureButtonBindings();
     groundCollectSubsystem = new GroundCollectSubsystem(0.2);
     SmartDashboard.putData("Auto Mode", m_chooser);
@@ -87,12 +90,21 @@ public class RobotContainer {
     // operatorController.a().onTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.transfer(transfer)).until(()-> transfer.getTransferSensor()));
     // operatorController.y().onTrue(TransferCommands.stop(transfer).alongWith(NoteIntakeCommands.stop(noteIntake)));
     // //operatorController.a().onFalse(TransferCommands.reverseTransfer(transfer).withTimeout(0.25555));
-    //operatorController.x().onTrue(new shooterCommand(shooterSubsystem, 2));
-   // operatorController.x().onFalse(new shooterCommand(shooterSubsystem, 0));
-    operatorController.a().whileTrue(new GroundCollectCommand(0.6, groundCollectSubsystem));
-    // operatorController.a().whileFalse(new GroundCollectCommand(0, groundCollectSubsystem));
-    operatorController.y().whileTrue(new TransferCommand(5, transferSubsystem));
+    // operatorController.x().onTrue(new shooterCommand(shooterSubsystem, 2));
+    // operatorController.x().onFalse(new shooterCommand(shooterSubsystem, 0));
+    // operatorController.a().whileTrue(new GroundCollectCommand(0.4, groundCollectSubsystem));
+    // operatorController.y().whileTrue(new TransferCommand(2, transferSubsystem));
+    
+    
+    operatorController.a().onTrue(
+      new GroundCollectCommand(0.3, groundCollectSubsystem).
+      raceWith(new TransferCommand(4, transferSubsystem)).
+      andThen(new shooterCommand(shooterSubsystem, 5)).
+      raceWith(new TransferCommand(4, transferSubsystem)));
+   
+
   }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

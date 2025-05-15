@@ -2,6 +2,7 @@
 package frc.robot.Subsystems.GroundCollect_yanir;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,7 +13,6 @@ public class GroundCollectSubsystem extends SubsystemBase {
 
     static VictorSPX mainMotor;
     static VictorSPX secondryMotor;
-    static POMDigitalInput isRingLoaded = new POMDigitalInput(0);// TODO
 
     static double outputToMotors;
 
@@ -25,7 +25,7 @@ public class GroundCollectSubsystem extends SubsystemBase {
 
 
     public static void setPower(double voltage){
-        mainMotor.set(ControlMode.PercentOutput, outputToMotors );
+        mainMotor.set(VictorSPXControlMode.PercentOutput, voltage);
     }
 
     public static double getPowerPrestage(){
@@ -36,14 +36,11 @@ public class GroundCollectSubsystem extends SubsystemBase {
         mainMotor.set(ControlMode.PercentOutput, 0);
     }
 
-    public static boolean isRingLoaded(){
-        return isRingLoaded.get();
-    }
+
 
     @Override
     public void periodic() {
         SmartDashboard.putNumber("motorOutputPresntage", getPowerPrestage());
-        SmartDashboard.putBoolean("is ring oaded", isRingLoaded());
         
     }
     

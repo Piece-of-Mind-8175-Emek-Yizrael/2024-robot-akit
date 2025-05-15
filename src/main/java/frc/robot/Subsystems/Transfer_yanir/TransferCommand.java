@@ -13,10 +13,8 @@ public class TransferCommand extends Command {
     }
 
     @Override
-    public void initialize() {
-        if (transferSubsystem.isRingLoaded()) {
-            transferSubsystem.SetMotorVoltage(Voltage);
-        }    
+    public void initialize(){
+        transferSubsystem.SetMotorVoltage(Voltage);
     }
 
     @Override
@@ -26,6 +24,14 @@ public class TransferCommand extends Command {
 
     @Override
     public boolean isFinished() {
+        if (transferSubsystem.isRingLoaded()) {
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            return transferSubsystem.isRingLoaded();
+        }
         return false;
     }
 }
