@@ -29,6 +29,7 @@ import frc.robot.Subsystems.Shooter.Shooter;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Commands.TransferCommands;
 import frc.robot.Commands.NoteIntakeCommands;
+import frc.robot.Commands.ShooterCommands;
 import frc.robot.Subsystems.Shooter.ShooterIOReal;
 import frc.robot.Subsystems.Shooter.ShooterIO;
 
@@ -93,6 +94,7 @@ public class RobotContainer {
     operatorController.leftTrigger().whileTrue(TransferCommands.shoot(transfer));
     drive.setDefaultCommand(DriveCommands.arcadeDrive(drive, driverController::getLeftY, driverController::getRightX));
     operatorController.a().onTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.transfer(transfer)).until(()-> transfer.getTransferSensor()));
+    operatorController.rightTrigger().whileTrue(ShooterCommands.shoot(shooter, 200));
     //operatorController.a().onFalse(TransferCommands.reverseTransfer(transfer).withTimeout(0.25555));
   }
 

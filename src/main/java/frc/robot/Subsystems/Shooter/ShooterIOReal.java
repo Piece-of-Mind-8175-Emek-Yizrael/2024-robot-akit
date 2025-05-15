@@ -50,7 +50,7 @@ public class ShooterIOReal implements ShooterIO {
         @Override
         public void setSetPoint(double goal) {
             pidController.setSetpoint(goal);
-            setVoltage(pidController.calculate(encoder.getPosition()));
+            setVoltage(pidController.calculate(encoder.getVelocity())*12);
         }
 
         @Override
