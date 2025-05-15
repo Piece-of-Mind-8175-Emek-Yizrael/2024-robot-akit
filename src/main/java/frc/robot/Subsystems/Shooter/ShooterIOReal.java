@@ -6,12 +6,11 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import java.util.function.BooleanSupplier;
 import static frc.robot.Subsystems.Shooter.ShooterConstants.*;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import frc.robot.POM_lib.sensors.POMDigitalInput;
 
 public class ShooterIOReal implements ShooterIO {
      
-        private final POMDigitalInput transferSensor = new POMDigitalInput(0);
         private final SparkMax right_motor;
         private final SparkMax left_motor;
         private final PIDController pidController;
@@ -25,8 +24,9 @@ public class ShooterIOReal implements ShooterIO {
             config = new SparkMaxConfig();
             encoder = right_motor.getEncoder();
             config
-            .idleMode(IdleMode.kCoast).follow(right_motor, true);
+            .idleMode(IdleMode.kCoast).follow(right_motor, true).closedLoop.outputRange(-0.5, 0.5);
             pidController.setTolerance(TOLERANCE);
+            
             
             
         }
@@ -39,7 +39,7 @@ public class ShooterIOReal implements ShooterIO {
         
         @Override
         public void setVoltage(double voltage) {
-            right_motor.setVoltage(voltage);
+            right_motor.setVoltage(MathUtil.clamp(voltage,  -8 , 8));
         }
     
         @Override
@@ -50,13 +50,22 @@ public class ShooterIOReal implements ShooterIO {
         @Override
         public void setSetPoint(double goal) {
             pidController.setSetpoint(goal);
-            setVoltage(pidController.calculate(encoder.getVelocity())*12);
+            setVoltage(pidController.calculate(encoder.getVelocity())*10);
         }
 
         @Override
         public BooleanSupplier atSetPoint() {
             return () -> pidController.atSetpoint();
         }
+
+        @Override
+        public double getRightVelocity(){
+            return right_motor.getEncoder().getVelocity();
+        }
         
+        @Override
+        public double getLeftVelocity(){
+            return left_motor.getEncoder().getVelocity();
+        }
         
 }

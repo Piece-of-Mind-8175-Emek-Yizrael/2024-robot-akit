@@ -1,6 +1,8 @@
 package frc.robot.Subsystems.Shooter;
 
 import org.littletonrobotics.junction.Logger;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Subsystems.Shooter.ShooterIO.ShooterIOInputs;
 
@@ -14,6 +16,12 @@ public class Shooter extends SubsystemBase {
 
     public ShooterIO getIO() {
         return shooterIO;
+    }
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("UP RPM", shooterIO.getRightVelocity() );
+        SmartDashboard.putNumber("DOWN rpm", shooterIO.getLeftVelocity() );
     }
     /*
     public ShooterIOInputsAutoLogged Shooterinputs = new ShooterIOInputsAutoLogged();

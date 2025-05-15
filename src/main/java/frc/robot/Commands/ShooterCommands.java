@@ -9,6 +9,10 @@ public class ShooterCommands extends Command {
         return shooter.runEnd(()-> shooter.getIO().setSetPoint(goal),()-> shooter.getIO().stopMotor()).until(shooter.getIO().atSetPoint());
     }
 
+    public static Command shootWithoutPID(Shooter shooter) {
+        return shooter.runEnd(()-> shooter.getIO().setSpeed(0.2),()-> shooter.getIO().stopMotor());
+    }
+
     public static Command stop(Shooter shooter) {
         return shooter.run(()-> shooter.getIO().stopMotor());
     }

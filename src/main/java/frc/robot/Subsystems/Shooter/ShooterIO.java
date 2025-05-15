@@ -20,6 +20,9 @@ public interface ShooterIO {
     public default void setSetPoint(double goal) {
     }
 
+    public default double getRightVelocity(){return 0;}
+    public default double getLeftVelocity(){return 0;}
+
     public default BooleanSupplier atSetPoint(){
         return () -> false;}
 
