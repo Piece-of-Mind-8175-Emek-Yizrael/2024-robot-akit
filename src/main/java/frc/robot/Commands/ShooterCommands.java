@@ -5,7 +5,7 @@ import frc.robot.Subsystems.shooter.Shooter;
 
 public class ShooterCommands {
     public static Command setSetPointCommand(Shooter shoot, double setPoint){
-        return Commands.run(() -> shoot.getIO().setSetPoint(setPoint), shoot);//.until(shoot.getIO().atSetPoint()).withName("setSetPointCommand: " + setPoint);
+        return Commands.run(() -> shoot.getIO().setSetPoint(setPoint), shoot).until(shoot.getIO().atSetPoint()).withName("setSetPointCommand: " + setPoint);
     }
 
     public static Command shootNote(Shooter shoot){

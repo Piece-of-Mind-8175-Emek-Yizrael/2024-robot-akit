@@ -52,7 +52,8 @@ public class RobotContainer {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
   
   private final PomXboxController driverController = new PomXboxController(0);
-  private final PomXboxController operatorController = new PomXboxController(1);
+  private final PomXboxController 
+  operatorController = new PomXboxController(1);
   private final Shooter shooter;
   private final Drive drive;
 
@@ -89,15 +90,13 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    operatorController.rightTrigger().onTrue(ShooterCommands.setSetPointCommand(shooter, ShooterConstants.SPEED));
-    operatorController.PovUp().onTrue(ShooterCommands.stopMotor(shooter));
+    operatorController.x().onTrue(ShooterCommands.setSetPointCommand(shooter, ShooterConstants.SPEED));
+    operatorController.y().onTrue(ShooterCommands.stopMotor(shooter));
     operatorController.b().whileTrue(ShooterCommands.shootNote(shooter));
     operatorController.leftTrigger().whileTrue(TransferCommands.shoot(transfer));
     drive.setDefaultCommand(DriveCommands.arcadeDrive(drive, driverController::getLeftY, driverController::getRightX));
     operatorController.a().onTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.transfer(transfer)).until(()-> transfer.getTransferSensor()));
     //operatorController.a().onFalse(TransferCommands.reverseTransfer(transfer).withTimeout(0.25555));
-
-
   }
 
   /**
