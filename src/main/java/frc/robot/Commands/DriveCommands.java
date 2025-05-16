@@ -54,6 +54,19 @@ public class DriveCommands {
         },
         drive);
   }
+  public static Command tanckDrive(
+      Drive drive, DoubleSupplier xSupplier, DoubleSupplier zSupplier) {
+    return Commands.run(
+        () -> {
+          
+          // Apply output
+          drive.runOpenLoop(
+              xSupplier.getAsDouble() * 5, zSupplier.getAsDouble() * 5);
+        },
+        drive);
+  }
+
+
 
   /** Measures the velocity feedforward constants for the drive. */
   public static Command feedforwardCharacterization(Drive drive) {

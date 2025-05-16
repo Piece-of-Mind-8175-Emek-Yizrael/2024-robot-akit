@@ -62,8 +62,8 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void robotPeriodic() {
-        LogFieldsTable.updateAllTables();
-        TuneablesManager.update();
+        // LogFieldsTable.updateAllTables();//TODO tunebale
+        // TuneablesManager.update();//TODO tunebale
         CommandScheduler.getInstance().run();
         voltageEntry.setDouble(RobotController.getBatteryVoltage());
         //SmartDashboard.putBoolean("sensor", sensor.get());
@@ -79,11 +79,11 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        autonomousCommand = robotContainer.getAutonomousCommand();
+        // autonomousCommand = robotContainer.getAutonomousCommand();
 
-        if (autonomousCommand != null) {
-            autonomousCommand.schedule();
-        }
+        // if (autonomousCommand != null) {
+        //     autonomousCommand.schedule();
+        // }
     }
 
     @Override
@@ -92,9 +92,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        if (autonomousCommand != null) {
-            autonomousCommand.cancel();
-        }
+        // if (autonomousCommand != null) {
+        //     autonomousCommand.cancel();
+        // }
     }
 
     @Override
@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
     @Override
     public void testInit() {
         CommandScheduler.getInstance().disable();
-        TuneablesManager.enable();
+        // TuneablesManager.enable(); //TODO tunebale
     }
 
     @Override

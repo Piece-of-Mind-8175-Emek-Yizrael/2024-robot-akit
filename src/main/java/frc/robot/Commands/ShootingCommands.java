@@ -11,7 +11,11 @@ public class ShootingCommands {
         return Commands.run(() -> shoot.getIO().setSetPoint(setPoint), shoot).until(shoot.getIO().atSetPoint()).withName("setSetPointCommand: " + setPoint);
     }
 
-    public static Command shootNote(Shoot shoot){
-        return Commands.startEnd(() -> shoot.getIO().setVoltage(10), () -> shoot.getIO().stopMotor(), shoot);
+    public static Command shootNote(Shoot shoot, double speed){
+        return Commands.startEnd(() -> shoot.getIO().setVoltage(speed), () -> shoot.getIO().stopMotor(), shoot);
+    }
+
+    public static Command stop(Shoot shoot){
+        return Commands.runOnce(() -> shoot.getIO().stopMotor(), shoot);
     }
 }

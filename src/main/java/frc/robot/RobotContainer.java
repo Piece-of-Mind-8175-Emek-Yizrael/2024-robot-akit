@@ -24,14 +24,11 @@ import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Subsystems.shoot.Shoot;
 
 import frc.robot.Commands.DriveCommands;
-import frc.robot.Commands.ShooterCommands;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Subsystems.drive.Drive;
 import frc.robot.Subsystems.drive.DriveIOTalonSRX;
-import frc.robot.Subsystems.shooter.Shooter;
-import frc.robot.Subsystems.shooter.ShooterIOReal;
-import frc.robot.Subsystems.shooter.ShooterConstants;
-import frc.robot.Subsystems.Transfer.Transfer;
+import frc.robot.Subsystems.
+Transfer.Transfer;
 import frc.robot.Subsystems.Transfer.TransferIOReal;
 import frc.robot.Subsystems.NoteIntake.NoteIntake;
 import frc.robot.Subsystems.NoteIntake.NoteIntakeIOReal;
@@ -51,21 +48,16 @@ import frc.robot.Commands.NoteIntakeCommands;
  * here.
  */
 public class RobotContainer {
-
-  private static RobotContainer m_robotContainer = new RobotContainer();
-  private Shoot shoot = new Shoot();
-  private PomXboxController driverController = new PomXboxController(0);
-  private PomXboxController opperatorController = new PomXboxController(1);
-
   
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  private static RobotContainer m_robotContainer = new RobotContainer();
   
   private final PomXboxController driverController = new PomXboxController(0);
   private final PomXboxController operatorController = new PomXboxController(1);
-  private final Shooter shooter;
   private final Drive drive;
-
+  private final Shoot shoot;
   private Transfer transfer;
   private NoteIntake noteIntake;
   
@@ -74,11 +66,11 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   private RobotContainer() {
-    SmartDashboard.putData("start tune", Commands.runOnce(TuneablesManager::enable));
+    //SmartDashboard.putData("start tune", Commands.runOnce(TuneablesManager::enable));
     noteIntake = new NoteIntake(new NoteIntakeIOReal());
-    shooter  = new Shooter(new ShooterIOReal());
     drive = new Drive(new DriveIOTalonSRX(), null);
     transfer = new Transfer(new TransferIOReal());
+    shoot = new Shoot();
     
     configureButtonBindings();
 
@@ -101,13 +93,29 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    opperatorController.y().whileTrue(ShootingCommands.shootNote(shoot));
-    opperatorController.x().onTrue(ShootingCommands.setSetPointCommand(shoot, 10));
-    operatorController.rightTrigger().whileTrue(ShooterCommands.startEndShoot(shooter, ShooterConstants.SPEED));
-    operatorController.leftTrigger().whileTrue(TransferCommands.shoot(transfer));
-    drive.setDefaultCommand(DriveCommands.arcadeDrive(drive, driverController::getLeftY, driverController::getRightX));
-    operatorController.a().onTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.transfer(transfer)).until(()-> transfer.getTransferSensor()));
-    operatorController.y().onTrue(TransferCommands.stop(transfer).alongWith(NoteIntakeCommands.stop(noteIntake)));
+    operatorController.rightTrigger().whileTrue(ShootingCommands.shootNote(shoot, 6));
+    operatorController.leftTrigger().whileTrue(TransferCommands.shoot(transfer).alongWith(NoteIntakeCommands.Intake(noteIntake)));
+    operatorController.a().onTrue(NoteIntakeCommands.Intake(noteIntake).
+    raceWith(TransferCommands.transfer(transfer)));
+    drive.setDefaultCommand(DriveCommands.tanckDrive(drive, driverController::getLeftY, driverController::getRightY));
+    
+    
+    operatorController.b().onTrue(NoteIntakeCommands.stop(noteIntake));
+    operatorController.x().onTrue(TransferCommands.stop(transfer));
+    operatorController.y().onTrue(ShootingCommands.stop(shoot));
+
+    
+
+    // andThen(TransferCommands.shoot(transfer).withTimeout(0.3)).
+    // andThen(ShootingCommands.shootNote(shoot).withTimeout(0.5)));
+
+    //operatorController.x().onTrue(ShootingCommands.setSetPointCommand(shoot, 10));
+
+
+    // operatorController.rightTrigger().whileTrue(ShooterCommands.startEndShoot(shooter, ShooterConstants.SPEED));
+    // operatorController.leftTrigger().whileTrue(TransferCommands.shoot(transfer));
+    // operatorController.a().onTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.transfer(transfer)).until(()-> transfer.getTransferSensor()));
+    // operatorController.y().onTrue(TransferCommands.stop(transfer).alongWith(NoteIntakeCommands.stop(noteIntake)));
     //operatorController.a().onFalse(TransferCommands.reverseTransfer(transfer).withTimeout(0.25555));
   }
 
