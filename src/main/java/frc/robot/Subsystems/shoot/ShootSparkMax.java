@@ -32,7 +32,7 @@ public class ShootSparkMax extends ShootIO implements Tuneable {
         SparkMaxConfig config = new SparkMaxConfig();
         pidController = new PIDController(KP,KI,KD);
 
-        config.idleMode(IdleMode.kCoast).follow(upperMotor, true)
+        config.idleMode(IdleMode.kCoast).follow(upperMotor, false)
                 .smartCurrentLimit(40)
                 .voltageCompensation(12);
         downMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
