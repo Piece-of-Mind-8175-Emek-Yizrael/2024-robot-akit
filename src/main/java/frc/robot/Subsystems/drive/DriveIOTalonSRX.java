@@ -18,6 +18,7 @@ import static frc.robot.Subsystems.drive.PhoenixUtil.*;
 
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
@@ -52,6 +53,7 @@ public class DriveIOTalonSRX implements DriveIO {
 
     leftLeader.setInverted(leftInverted);
     rightLeader.setInverted(rightInverted);
+    rightFollower.setInverted(true);
 
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
