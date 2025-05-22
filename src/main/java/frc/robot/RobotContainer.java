@@ -17,11 +17,13 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Commands.driveCommand;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Subsystems.GroundCollect_yanir.GroundCollectCommand;
 import frc.robot.Subsystems.shooter_yanir.shooterCommand;
 import frc.robot.Subsystems.shooter_yanir.shooterSubsystem;
 import frc.robot.Subsystems.GroundCollect_yanir.GroundCollectSubsystem;
+import frc.robot.Subsystems.drive.drive;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -48,6 +50,7 @@ public class RobotContainer {
   private final GroundCollectSubsystem groundCollectSubsystem;
   // private Transfer transfer;
   // private NoteIntake noteIntake;
+  private final drive driveSubSystem;
   
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -62,6 +65,7 @@ public class RobotContainer {
     configureButtonBindings();
     groundCollectSubsystem = new GroundCollectSubsystem(0.2);
     SmartDashboard.putData("Auto Mode", m_chooser);
+    driveSubSystem = new drive();
 
     
   }
@@ -87,8 +91,14 @@ public class RobotContainer {
     // //operatorController.a().onFalse(TransferCommands.reverseTransfer(transfer).withTimeout(0.25555));
     //operatorController.x().onTrue(new shooterCommand(shooterSubsystem, 2));
    // operatorController.x().onFalse(new shooterCommand(shooterSubsystem, 0));
-    operatorController.a().whileTrue(new GroundCollectCommand(0.6, groundCollectSubsystem));
+    //operatorController.a().whileTrue(new GroundCollectCommand(0.6, groundCollectSubsystem));
     // operatorController.a().whileFalse(new GroundCollectCommand(0, groundCollectSubsystem));
+    driverController.PovDown().whileTrue(new driveCommand(driveSubSystem,-0.3 , -0.3));
+    driverController.PovUp().whileTrue(new driveCommand(driveSubSystem,0.3 , 0.3));
+    driverController.PovLeft().whileTrue(new driveCommand(driveSubSystem,0 , 0.3));
+    driverController.PovRight().whileTrue(new driveCommand(driveSubSystem,0.3 , 0));
+
+
   }
 
   /**
