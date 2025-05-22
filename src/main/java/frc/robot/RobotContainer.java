@@ -62,11 +62,11 @@ public class RobotContainer {
     //drive = new Drive(new DriveIOTalonSRX(), null);
     //transfer = new Transfer(new TransferIOReal());
     shooterSubsystem = new shooterSubsystem();
-    configureButtonBindings();
     groundCollectSubsystem = new GroundCollectSubsystem(0.2);
     SmartDashboard.putData("Auto Mode", m_chooser);
     driveSubSystem = new drive();
-
+    
+    configureButtonBindings();
     
   }
 
@@ -95,8 +95,8 @@ public class RobotContainer {
     // operatorController.a().whileFalse(new GroundCollectCommand(0, groundCollectSubsystem));
     driverController.PovDown().whileTrue(new driveCommand(driveSubSystem,-0.3 , -0.3));
     driverController.PovUp().whileTrue(new driveCommand(driveSubSystem,0.3 , 0.3));
-    driverController.PovLeft().whileTrue(new driveCommand(driveSubSystem,0 , 0.3));
-    driverController.PovRight().whileTrue(new driveCommand(driveSubSystem,0.3 , 0));
+    driverController.PovLeft().whileTrue(new driveCommand(driveSubSystem,-0.3 , 0.3));
+    driverController.PovRight().whileTrue(new driveCommand(driveSubSystem,0.3 , -0.3));
 
 
   }
