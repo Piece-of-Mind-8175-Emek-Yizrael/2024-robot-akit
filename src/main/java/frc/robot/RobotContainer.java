@@ -93,10 +93,10 @@ public class RobotContainer {
    // operatorController.x().onFalse(new shooterCommand(shooterSubsystem, 0));
     //operatorController.a().whileTrue(new GroundCollectCommand(0.6, groundCollectSubsystem));
     // operatorController.a().whileFalse(new GroundCollectCommand(0, groundCollectSubsystem));
-    driverController.PovDown().whileTrue(new driveCommand(driveSubSystem,-0.3 , -0.3));
-    driverController.PovUp().whileTrue(new driveCommand(driveSubSystem,0.3 , 0.3));
-    driverController.PovLeft().whileTrue(new driveCommand(driveSubSystem,-0.3 , 0.3));
-    driverController.PovRight().whileTrue(new driveCommand(driveSubSystem,0.3 , -0.3));
+    driverController.PovDown().whileTrue(new driveCommand(driveSubSystem,-0.6 , -0.6));
+    driverController.PovUp().whileTrue(new driveCommand(driveSubSystem,0.6 , 0.6));
+    driverController.PovLeft().whileTrue(new driveCommand(driveSubSystem,-0.6 , 0.6));
+    driverController.PovRight().whileTrue(new driveCommand(driveSubSystem,0.6 , -0.6));
 
 
   }
