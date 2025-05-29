@@ -46,7 +46,7 @@ public class RobotContainer {
   // private final Drive drive;
   private final shooterSubsystem shooterSubsystem;
   private final GroundCollectSubsystem groundCollectSubsystem;
-  // private Transfer transfer;
+   //private Transfer transfer;
   // private NoteIntake noteIntake;
   private final Drive driveSubSystem;
   
@@ -58,7 +58,7 @@ public class RobotContainer {
     //noteIntake = new NoteIntake(new NoteIntakeIOReal());
     //shooter  = new Shooter(new ShooterIOReal());
     //drive = new Drive(new DriveIOTalonSRX(), null);
-    //transfer = new Transfer(new TransferIOReal());
+   // transfer = new Transfer(new TransferIOReal());
     shooterSubsystem = new shooterSubsystem();
     groundCollectSubsystem = new GroundCollectSubsystem(0.2);
     SmartDashboard.putData("Auto Mode", m_chooser);
@@ -88,10 +88,19 @@ public class RobotContainer {
     // operatorController.y().onTrue(TransferCommands.stop(transfer).alongWith(NoteIntakeCommands.stop(noteIntake)));
     // //operatorController.a().onFalse(TransferCommands.reverseTransfer(transfer).withTimeout(0.25555));
     //operatorController.x().onTrue(new shooterCommand(shooterSubsystem, 2));
-   // operatorController.x().onFalse(new shooterCommand(shooterSubsystem, 0));
+   //operatorController.x().onFalse(new shooterCommand(shooterSubsystem, 0));
     //operatorController.a().whileTrue(new GroundCollectCommand(0.6, groundCollectSubsystem));
-    // operatorController.a().whileFalse(new GroundCollectCommand(0, groundCollectSubsystem));
-    driveSubSystem.setDefaultCommand(new driveCommand(driveSubSystem, driverController.getLeftY(), driverController.getRightY()));
+     //operatorController.a().whileFalse(new GroundCollectCommand(0, groundCollectSubsystem));
+    
+    //driveSubSystem.setDefaultCommand(new driveCommand(driveSubSystem, 0.3, 0.3));
+
+    double globalPrecentage_yanir = 0.3;
+    driverController.PovUp().whileTrue(new driveCommand(driveSubSystem, -globalPrecentage_yanir, -globalPrecentage_yanir));
+    driverController.PovDown().whileTrue(new driveCommand(driveSubSystem, globalPrecentage_yanir, globalPrecentage_yanir));
+    driverController.PovLeft().whileTrue(new driveCommand(driveSubSystem, globalPrecentage_yanir, -globalPrecentage_yanir));
+    driverController.PovRight().whileTrue(new driveCommand(driveSubSystem, -globalPrecentage_yanir, globalPrecentage_yanir));
+
+
 
   }
 

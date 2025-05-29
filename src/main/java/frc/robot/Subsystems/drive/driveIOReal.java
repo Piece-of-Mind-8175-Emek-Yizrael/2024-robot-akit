@@ -16,9 +16,10 @@ public class driveIOReal implements DriveIO{
        // TalonSRXConfiguration config = new TalonSRXConfiguration();
 
         leftLeader.setInverted(true);
-        rightLeader.setInverted(true);
+        rightLeader.setInverted(false);
 
         leftFollower.follow(leftLeader);
+        leftFollower.setInverted(true);
         rightFollower.follow(rightLeader); 
     }
 
