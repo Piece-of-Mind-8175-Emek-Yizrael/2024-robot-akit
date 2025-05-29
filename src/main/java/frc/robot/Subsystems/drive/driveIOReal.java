@@ -7,10 +7,10 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 public class driveIOReal implements DriveIO{
 
     
-    private final VictorSPX leftLeader = new VictorSPX(2);// TODO get id/port number
-    private final TalonSRX leftFollower = new TalonSRX(1);// TODO get id/port number
-    private final VictorSPX rightLeader = new VictorSPX(4);// TODO get id/port number
-    private final TalonSRX rightFollower = new TalonSRX(3);// TODO get id/port number
+    private final VictorSPX leftLeader = new VictorSPX(2);
+    private final TalonSRX leftFollower = new TalonSRX(1);
+    private final VictorSPX rightLeader = new VictorSPX(4);
+    private final TalonSRX rightFollower = new TalonSRX(3);
 
     public driveIOReal(){
        // TalonSRXConfiguration config = new TalonSRXConfiguration();
