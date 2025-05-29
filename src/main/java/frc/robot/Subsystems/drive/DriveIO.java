@@ -1,6 +1,6 @@
 package frc.robot.Subsystems.drive;
 
-public interface driveIO {
+public interface DriveIO {
 
     public static class driveIOInputs {
     }

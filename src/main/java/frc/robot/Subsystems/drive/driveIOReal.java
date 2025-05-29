@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-public class driveIOReal implements driveIO{
+public class driveIOReal implements DriveIO{
 
     
     private final VictorSPX leftLeader = new VictorSPX(2);// TODO get id/port number
@@ -16,7 +16,7 @@ public class driveIOReal implements driveIO{
        // TalonSRXConfiguration config = new TalonSRXConfiguration();
 
         leftLeader.setInverted(true);
-        rightLeader.setInverted(false);
+        rightLeader.setInverted(true);
 
         leftFollower.follow(leftLeader);
         rightFollower.follow(rightLeader); 

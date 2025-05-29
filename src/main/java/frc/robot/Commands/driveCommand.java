@@ -1,15 +1,15 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Subsystems.drive.drive;
+import frc.robot.Subsystems.drive.Drive;
 
 public class driveCommand extends Command {
 
-    drive driveSubsystem;
+    Drive driveSubsystem;
     double leftMotorPrecent;
     double rightMotorPrecent;
     
-    public driveCommand(drive drive , double lEftMotorPrecent, double rIghtMotorPrecent){
+    public driveCommand(Drive drive , double lEftMotorPrecent, double rIghtMotorPrecent){
         driveSubsystem = drive;
         leftMotorPrecent = lEftMotorPrecent;
         rightMotorPrecent= rIghtMotorPrecent;

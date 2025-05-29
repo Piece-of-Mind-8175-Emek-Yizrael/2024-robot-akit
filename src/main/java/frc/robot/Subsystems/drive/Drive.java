@@ -3,10 +3,10 @@ import java.util.logging.Logger;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class drive extends SubsystemBase {
+public class Drive extends SubsystemBase {
     driveIOReal driveIo;
 
-    public drive(){
+    public Drive(){
         driveIo = new driveIOReal();
     }
 

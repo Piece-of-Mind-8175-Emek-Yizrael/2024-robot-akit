@@ -19,11 +19,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Commands.driveCommand;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
-import frc.robot.Subsystems.GroundCollect_yanir.GroundCollectCommand;
-import frc.robot.Subsystems.shooter_yanir.shooterCommand;
-import frc.robot.Subsystems.shooter_yanir.shooterSubsystem;
 import frc.robot.Subsystems.GroundCollect_yanir.GroundCollectSubsystem;
-import frc.robot.Subsystems.drive.drive;
+import frc.robot.Subsystems.drive.Drive;
+import frc.robot.Subsystems.shooter_yanir.shooterSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -50,7 +48,7 @@ public class RobotContainer {
   private final GroundCollectSubsystem groundCollectSubsystem;
   // private Transfer transfer;
   // private NoteIntake noteIntake;
-  private final drive driveSubSystem;
+  private final Drive driveSubSystem;
   
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -64,7 +62,7 @@ public class RobotContainer {
     shooterSubsystem = new shooterSubsystem();
     groundCollectSubsystem = new GroundCollectSubsystem(0.2);
     SmartDashboard.putData("Auto Mode", m_chooser);
-    driveSubSystem = new drive();
+    driveSubSystem = new Drive();
     
     configureButtonBindings();
     
@@ -98,7 +96,7 @@ public class RobotContainer {
     driverController.PovLeft().whileTrue(new driveCommand(driveSubSystem,-0.6 , 0.6));
     driverController.PovRight().whileTrue(new driveCommand(driveSubSystem,0.6 , -0.6));
 
-
+    driveSubSystem.setDefaultCommand(new driveCommand(driveSubSystem, driverController.getRightY() * 0.3, driverController.getLeftY() * 0.3));
   }
 
   /**
