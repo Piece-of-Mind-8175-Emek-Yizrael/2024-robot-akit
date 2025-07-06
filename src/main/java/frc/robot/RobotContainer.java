@@ -95,7 +95,7 @@ public class RobotContainer {
     //driveSubSystem.setDefaultCommand(new driveCommand(driveSubSystem, 0.3, 0.3));
 
     double globalPrecentage_yanir = 0.3;
-    driverController.PovUp().whileTrue(new driveCommand(driveSubSystem, -globalPrecentage_yanir, -globalPrecentage_yanir));
+    driverController.PovUp().whileTrue(new driveCommand(driveSubSystem, -globalPrecentage_yanir,-globalPrecentage_yanir));
     driverController.PovDown().whileTrue(new driveCommand(driveSubSystem, globalPrecentage_yanir, globalPrecentage_yanir));
     driverController.PovLeft().whileTrue(new driveCommand(driveSubSystem, globalPrecentage_yanir, -globalPrecentage_yanir));
     driverController.PovRight().whileTrue(new driveCommand(driveSubSystem, -globalPrecentage_yanir, globalPrecentage_yanir));
