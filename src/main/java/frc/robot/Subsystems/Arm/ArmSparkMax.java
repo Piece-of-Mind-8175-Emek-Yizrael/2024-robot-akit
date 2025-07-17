@@ -14,6 +14,7 @@ import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.POM_lib.sensors.POMDigitalInput;
 import static frc.robot.Subsystems.Arm.ArmConstants.*;
@@ -26,10 +27,12 @@ public class ArmSparkMax implements ArmIO {
     POMDigitalInput limitSwitch;
     SparkBaseConfig config;
     RelativeEncoder encoder;
+    Constraints constraints;
 
     public ArmSparkMax() {
         motor = new SparkMax(MOTOR_ID, MotorType.kBrushless);
-        pidController = new ProfiledPIDController(kP, kI, kD, null);
+        constraints = new Constraints(MAX_VELOCITY, MAX_ACCELERATION);
+        pidController = new ProfiledPIDController(kP, kI, kD, constraints);
         feedforward = new ArmFeedforward(kS, kG, kV, kA);
         limitSwitch = new POMDigitalInput(LIMIT_SWITCH_CHANNEL, IS_NORMALLY_OPEN);
         config = new SparkMaxConfig();
@@ -69,8 +72,28 @@ public class ArmSparkMax implements ArmIO {
     }
 
     @Override
-    public void setFF() {
+    public void setFF(double goal, double velocity) {
+        pidController.setGoal(goal);
+        motor.setVoltage(feedforward.calculate(encoder.getPosition(), velocity));
+    }
 
+    @Override
+    public void setPIDWIithFF(double goal, double velocity) {
+        pidController.setGoal(goal);
+        motor.setVoltage(pidController.calculate(encoder.getPosition())
+                + feedforward.calculate(encoder.getPosition(), velocity));
+    }
+
+    @Override
+    public void stopMotor() {
+        motor.stopMotor();
+    }
+
+    @Override
+    public void resetEncoder() {
+        if (limitSwitch.get() == true) {
+            encoder.setPosition(0);
+        }
     }
 
 }
