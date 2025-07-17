@@ -30,7 +30,10 @@ public interface ArmIO {
    }
 
    public default void stopMotor() {
+   }
 
+   public default boolean atGoal() {
+      return false;
    }
 
 }

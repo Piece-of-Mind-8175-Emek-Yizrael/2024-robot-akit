@@ -96,4 +96,8 @@ public class ArmSparkMax implements ArmIO {
         }
     }
 
+    @Override
+    public boolean atGoal() {
+        return pidController.atGoal();
+    }
 }
