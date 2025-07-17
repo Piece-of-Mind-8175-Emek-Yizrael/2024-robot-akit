@@ -19,7 +19,8 @@ public class ArmCommands extends SubsystemBase {
     }
 
     public Command runArmPIDWithFF(double goal, double velocity) {
-        return new FunctionalCommand(null, () -> arm.getIO().setPIDWIithFF(goal, velocity),
+        return new FunctionalCommand(() -> {
+        }, () -> arm.getIO().setPIDWIithFF(goal, velocity),
                 Interrupted -> arm.getIO().stopMotor(), () -> arm.getIO().atGoal(), arm);
 
     }
