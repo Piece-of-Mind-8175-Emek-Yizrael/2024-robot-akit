@@ -1,7 +1,7 @@
 package frc.robot.Subsystems.Arm;
 
 public class ArmConstants {
-    public final static int MOTOR_ID = 0;
+    public final static int MOTOR_ID = 3;
     public final static int LIMIT_SWITCH_CHANNEL = 0;
 
     public final static boolean IS_NORMALLY_OPEN = true;
