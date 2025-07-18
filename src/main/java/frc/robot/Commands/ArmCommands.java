@@ -14,13 +14,12 @@ public class ArmCommands extends SubsystemBase {
         return Commands.runEnd(() -> arm.getIO().setSpeed(speed), () -> arm.getIO().stopMotor(), arm);
     }
 
-    public Command runArmFF(double goal, double velocity) {
-        return Commands.runEnd(() -> arm.getIO().setFF(goal, velocity), () -> arm.getIO().stopMotor(), arm);
+    public Command runArmFF(double goal) {
+        return Commands.runEnd(() -> arm.getIO().setFF(), () -> arm.getIO().stopMotor(), arm);
     }
 
-    public Command runArmPIDWithFF(double goal, double velocity) {
-        return new FunctionalCommand(() -> {
-        }, () -> arm.getIO().setPIDWIithFF(goal, velocity),
+    public Command runArmPIDWithFF(double goal) {
+        return new FunctionalCommand(() -> arm.getIO().reserPID(), () -> arm.getIO().setPIDWIithFF(goal),
                 Interrupted -> arm.getIO().stopMotor(), () -> arm.getIO().atGoal(), arm);
 
     }

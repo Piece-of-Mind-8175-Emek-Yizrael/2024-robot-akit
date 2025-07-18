@@ -1,11 +1,11 @@
 package frc.robot.Subsystems.Arm;
 
-public  class ArmConstants {
+public class ArmConstants {
     public final static int MOTOR_ID = 0;
     public final static int LIMIT_SWITCH_CHANNEL = 0;
 
     public final static boolean IS_NORMALLY_OPEN = true;
-    
+
     public final static double kP = 0;
     public final static double kI = 0;
     public final static double kD = 0;
@@ -22,5 +22,5 @@ public  class ArmConstants {
     public static final boolean INVERTED = true;
     public static final double MAX_ACCELERATION = 0;
     public static final double MAX_VELOCITY = 0;
-    public static final double TOLERANCE = 0.3;    
+    public static final double TOLERANCE = 0.3;
 }

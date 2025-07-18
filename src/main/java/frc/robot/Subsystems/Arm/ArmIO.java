@@ -20,13 +20,13 @@ public interface ArmIO {
    public default void setVoltage(double voltage) {
    }
 
-   public default void setPIDWIithFF(double goal, double velocity) {
+   public default void setPIDWIithFF(double goal) {
    }
 
-   public default void setFF(double goal, double velocity) {
+   public default void setFF() {
    }
 
-   public default void resetEncoder() {
+   public default void resetEncoderIfPressed() {
    }
 
    public default void stopMotor() {
@@ -34,6 +34,12 @@ public interface ArmIO {
 
    public default boolean atGoal() {
       return false;
+   }
+
+   public default void reserPID() {
+   }
+
+   public default void setPIDvalues() {
    }
 
 }

@@ -11,11 +11,9 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.math.controller.ArmFeedforward;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
-import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.POM_lib.sensors.POMDigitalInput;
 import static frc.robot.Subsystems.Arm.ArmConstants.*;
 
@@ -28,6 +26,7 @@ public class ArmSparkMax implements ArmIO {
     SparkBaseConfig config;
     RelativeEncoder encoder;
     Constraints constraints;
+    ArmTuning armTuning;
 
     public ArmSparkMax() {
         motor = new SparkMax(MOTOR_ID, MotorType.kBrushless);
@@ -37,6 +36,7 @@ public class ArmSparkMax implements ArmIO {
         limitSwitch = new POMDigitalInput(LIMIT_SWITCH_CHANNEL, IS_NORMALLY_OPEN);
         config = new SparkMaxConfig();
         encoder = motor.getEncoder();
+        armTuning = new ArmTuning();
 
         config.idleMode(IdleMode.kCoast).inverted(INVERTED)
                 .smartCurrentLimit(CURRENT_LIMIT)
@@ -72,16 +72,14 @@ public class ArmSparkMax implements ArmIO {
     }
 
     @Override
-    public void setFF(double goal, double velocity) {
-        pidController.setGoal(goal);
-        motor.setVoltage(feedforward.calculate(encoder.getPosition(), velocity));
+    public void setFF() {
+        motor.setVoltage(feedforward.calculate(encoder.getPosition(), pidController.getSetpoint().velocity));
     }
 
     @Override
-    public void setPIDWIithFF(double goal, double velocity) {
-        pidController.setGoal(goal);
-        motor.setVoltage(pidController.calculate(encoder.getPosition())
-                + feedforward.calculate(encoder.getPosition(), velocity));
+    public void setPIDWIithFF(double goal) {
+        motor.setVoltage(pidController.calculate(encoder.getPosition(), goal)
+                + feedforward.calculate(encoder.getPosition(), pidController.getSetpoint().velocity));
     }
 
     @Override
@@ -90,7 +88,7 @@ public class ArmSparkMax implements ArmIO {
     }
 
     @Override
-    public void resetEncoder() {
+    public void resetEncoderIfPressed() {
         if (limitSwitch.get() == true) {
             encoder.setPosition(0);
         }
@@ -99,5 +97,19 @@ public class ArmSparkMax implements ArmIO {
     @Override
     public boolean atGoal() {
         return pidController.atGoal();
+    }
+
+    @Override
+    public void reserPID() {
+        pidController.reset(encoder.getPosition());
+    }
+
+    @Override
+    public void setPIDvalues() {
+        pidController.setPID(armTuning.getKp(), armTuning.getKi(), armTuning.getKd());
+        pidController.setConstraints(
+                new TrapezoidProfile.Constraints(armTuning.getMaxVelocity(), armTuning.getMaxAcceleration()));
+        feedforward = new ArmFeedforward(armTuning.getKs(), armTuning.getKg(), armTuning.getKv(),
+                armTuning.getKa());
     }
 }
