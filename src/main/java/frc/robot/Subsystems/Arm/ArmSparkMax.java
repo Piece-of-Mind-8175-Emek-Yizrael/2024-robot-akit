@@ -59,6 +59,8 @@ public class ArmSparkMax implements ArmIO {
         inputs.limitSwitch = limitSwitch.get();
         inputs.position = encoder.getPosition();
         inputs.velocity = encoder.getVelocity();
+        setPIDvalues();
+        resetEncoderIfPressed();
     }
 
     @Override
@@ -100,7 +102,7 @@ public class ArmSparkMax implements ArmIO {
     }
 
     @Override
-    public void reserPID() {
+    public void resetPID() {
         pidController.reset(encoder.getPosition());
     }
 

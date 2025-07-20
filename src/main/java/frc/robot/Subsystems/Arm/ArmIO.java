@@ -40,7 +40,7 @@ public interface ArmIO {
       return false;
    }
 
-   public default void reserPID() {
+   public default void resetPID() {
    }
 
    public default void setPIDvalues() {

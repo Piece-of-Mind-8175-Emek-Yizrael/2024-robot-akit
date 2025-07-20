@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
-    ArmIO armIO;
-    ArmIOInputsAutoLogged armInputs = new ArmIOInputsAutoLogged();
+    private final ArmIO armIO;
+    private final ArmIOInputsAutoLogged armInputs = new ArmIOInputsAutoLogged();
 
     public Arm(ArmIO armIO) {
         this.armIO = armIO;
@@ -19,8 +19,6 @@ public class Arm extends SubsystemBase {
 
     @Override
     public void periodic() {
-        getIO().setPIDvalues();
-        getIO().resetEncoderIfPressed();
         SmartDashboard.putString("CurremtCommand",
                 getCurrentCommand() == null ? "None" : getCurrentCommand().getName());
         Logger.processInputs("Arm", armInputs);// need to fix autoLog

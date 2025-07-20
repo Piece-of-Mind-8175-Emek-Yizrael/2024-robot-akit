@@ -74,7 +74,7 @@ public class RobotContainer {
     drive = new Drive(new DriveIOTalonSRX(), null);
     transfer = new Transfer(new TransferIOReal());
     arm = new Arm(new ArmSparkMax());
-    armCommands = new ArmCommands();
+    armCommands = new ArmCommands(arm);
 
     configureButtonBindings();
 
@@ -99,6 +99,8 @@ public class RobotContainer {
     operatorController.a().onTrue(armCommands.runArmFF());
     operatorController.b().onTrue(armCommands.runArmPIDWithFF(0));
     operatorController.x().onTrue(armCommands.runArmPIDWithFF(7));
+    operatorController.PovUp().whileTrue(armCommands.runArm(0.2));
+    operatorController.PovDown().whileTrue(armCommands.runArm(-0.05));
 
   }
 
