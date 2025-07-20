@@ -14,7 +14,7 @@ public class ArmCommands extends SubsystemBase {
         return Commands.runEnd(() -> arm.getIO().setSpeed(speed), () -> arm.getIO().stopMotor(), arm);
     }
 
-    public Command runArmFF(double goal) {
+    public Command runArmFF() {
         return Commands.runEnd(() -> arm.getIO().setFF(), () -> arm.getIO().stopMotor(), arm);
     }
 

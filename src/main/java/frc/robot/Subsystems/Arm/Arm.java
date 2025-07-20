@@ -22,8 +22,8 @@ public class Arm extends SubsystemBase {
         getIO().resetEncoderIfPressed();
         SmartDashboard.putString("CurremtCommand",
                 getCurrentCommand() == null ? "None" : getCurrentCommand().getName());
-        Logger.processInputs("Arm", null);// need to fix autoLog
-        getIO().updateInputs(null);// need to fix autoLog
+        // Logger.processInputs("Arm", null);// need to fix autoLog
+        // getIO().updateInputs(null);// need to fix autoLog
     }
 
 }

@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Commands.ArmCommands;
 import frc.robot.Commands.DriveCommands;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Subsystems.drive.Drive;
@@ -62,6 +63,7 @@ public class RobotContainer {
   private NoteIntake noteIntake;
   private Shooter shooter;
   private Arm arm;
+  private ArmCommands armCommands;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -72,6 +74,7 @@ public class RobotContainer {
     drive = new Drive(new DriveIOTalonSRX(), null);
     transfer = new Transfer(new TransferIOReal());
     arm = new Arm(new ArmSparkMax());
+    armCommands = new ArmCommands();
 
     configureButtonBindings();
 
@@ -92,6 +95,10 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    operatorController.a().onTrue(armCommands.runArmFF());
+    operatorController.b().onTrue(armCommands.runArmPIDWithFF(0));
+    operatorController.x().onTrue(armCommands.runArmPIDWithFF(7));
 
   }
 
