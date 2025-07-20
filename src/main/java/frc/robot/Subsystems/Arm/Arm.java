@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
     ArmIO armIO;
+    ArmIOInputsAutoLogged armInputs = new ArmIOInputsAutoLogged();
 
     public Arm(ArmIO armIO) {
         this.armIO = armIO;
@@ -22,8 +23,8 @@ public class Arm extends SubsystemBase {
         getIO().resetEncoderIfPressed();
         SmartDashboard.putString("CurremtCommand",
                 getCurrentCommand() == null ? "None" : getCurrentCommand().getName());
-        // Logger.processInputs("Arm", null);// need to fix autoLog
-        // getIO().updateInputs(null);// need to fix autoLog
+        Logger.processInputs("Arm", armInputs);// need to fix autoLog
+        getIO().updateInputs(armInputs);// need to fix autoLog
     }
 
 }

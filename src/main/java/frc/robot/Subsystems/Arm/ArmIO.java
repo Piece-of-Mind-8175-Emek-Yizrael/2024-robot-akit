@@ -1,6 +1,10 @@
 package frc.robot.Subsystems.Arm;
 
+import org.littletonrobotics.junction.AutoLog;
+
 public interface ArmIO {
+
+   @AutoLog
 
    public static class ArmIOInputs {
 

@@ -38,7 +38,7 @@ public class ArmSparkMax implements ArmIO {
         encoder = motor.getEncoder();
         armTuning = new ArmTuning();
 
-        config.idleMode(IdleMode.kCoast).inverted(INVERTED)
+        config.idleMode(IdleMode.kBrake).inverted(INVERTED)
                 .smartCurrentLimit(CURRENT_LIMIT)
                 .voltageCompensation(VOLTAGE_COMPENSATION);
 
