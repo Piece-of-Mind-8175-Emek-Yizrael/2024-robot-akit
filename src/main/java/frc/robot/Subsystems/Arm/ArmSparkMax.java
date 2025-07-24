@@ -38,11 +38,11 @@ public class ArmSparkMax implements ArmIO {
         encoder = motor.getEncoder();
         armTuning = new ArmTuning();
 
-        config.idleMode(IdleMode.kBrake).inverted(INVERTED)
+        config.idleMode(IdleMode.kCoast).inverted(INVERTED)
                 .smartCurrentLimit(CURRENT_LIMIT)
                 .voltageCompensation(VOLTAGE_COMPENSATION);
 
-        config.encoder.positionConversionFactor(1.0)
+        config.encoder.positionConversionFactor(POSITION_CONVERSION_FACTOR)
                 .velocityConversionFactor(1.0 / 60.0);
 
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);

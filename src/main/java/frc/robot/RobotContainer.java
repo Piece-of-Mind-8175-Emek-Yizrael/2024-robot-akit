@@ -98,7 +98,7 @@ public class RobotContainer {
 
     operatorController.a().onTrue(armCommands.runArmFF());
     operatorController.b().onTrue(armCommands.runArmPIDWithFF(0));
-    operatorController.x().onTrue(armCommands.runArmPIDWithFF(7));
+    operatorController.x().onTrue(armCommands.runArmPIDWithFF(1));
     operatorController.PovUp().whileTrue(armCommands.runArm(0.2));
     operatorController.PovDown().whileTrue(armCommands.runArm(-0.05));
 
