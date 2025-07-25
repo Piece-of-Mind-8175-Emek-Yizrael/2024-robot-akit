@@ -12,6 +12,7 @@ public interface ArmIO {
       double position;
       double velocity;
       boolean limitSwitch;
+      double PIDVelocity;
 
    }
 

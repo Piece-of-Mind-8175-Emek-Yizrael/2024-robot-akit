@@ -43,7 +43,7 @@ public class ArmSparkMax implements ArmIO {
                 .voltageCompensation(VOLTAGE_COMPENSATION);
 
         config.encoder.positionConversionFactor(POSITION_CONVERSION_FACTOR)
-                .velocityConversionFactor(1.0 / 60.0);
+                .velocityConversionFactor(POSITION_CONVERSION_FACTOR / 60.0);
 
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -59,6 +59,7 @@ public class ArmSparkMax implements ArmIO {
         inputs.limitSwitch = limitSwitch.get();
         inputs.position = encoder.getPosition();
         inputs.velocity = encoder.getVelocity();
+        inputs.PIDVelocity = pidController.getSetpoint().velocity;
         setPIDvalues();
         resetEncoderIfPressed();
     }
