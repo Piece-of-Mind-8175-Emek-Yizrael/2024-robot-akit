@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfigurator;
 import com.ctre.phoenix6.hardware.TalonFX;
+import static frc.robot.Subsystems.Drive.DriveConstants.*;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
@@ -19,10 +20,10 @@ public class DriveIOReal implements DriveIO {
     DifferentialDrive differentialDrive;
 
     public DriveIOReal() {
-        rightFollower = new VictorSPX(0);
-        rightLeader = new TalonFX(0);
-        leftFollower = new VictorSPX(0);
-        LeftLeader = new TalonFX(0);
+        rightFollower = new VictorSPX(rightFollowerCanId);
+        rightLeader = new TalonFX(rightLeaderCanId);
+        leftFollower = new VictorSPX(leftFollowerCanId);
+        LeftLeader = new TalonFX(leftLeaderCanId);
         // differentialDrive = new DifferentialDrive(LeftLeader, rightLeader);
 
         // leftFollower.follow(LeftLeader);
