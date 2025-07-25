@@ -14,6 +14,9 @@ public interface DriveIO {
     public default void setVoltage(double rightVoltage, double leftVoltage) {
     }
 
+    public default void stopMotor() {
+    }
+
     public default void updateInputs(DriveIOInputs inputs) {
     }
 

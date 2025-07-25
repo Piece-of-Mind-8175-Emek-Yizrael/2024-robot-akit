@@ -23,7 +23,7 @@ public class DriveIOReal implements DriveIO {
         rightLeader = new TalonFX(0);
         leftFollower = new VictorSPX(0);
         LeftLeader = new TalonFX(0);
-        differentialDrive = new DifferentialDrive(null, null);
+        // differentialDrive = new DifferentialDrive(null, null);
 
         // leftFollower.follow(LeftLeader);
         // rightFollower.follow(rightLeader);
@@ -41,6 +41,12 @@ public class DriveIOReal implements DriveIO {
         rightLeader.setVoltage(rightVoltage * 12);
         LeftLeader.setVoltage(leftVoltage);
 
+    }
+
+    @Override
+    public void stopMotor() {
+        rightLeader.stopMotor();
+        LeftLeader.stopMotor();
     }
 
     @Override

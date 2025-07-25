@@ -10,6 +10,10 @@ public class Drive extends SubsystemBase {
         this.driveIO = driveIO;
     }
 
+    public DriveIO getIO(){
+        return driveIO;
+    }
+
     @Override
     public void periodic() {
 

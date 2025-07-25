@@ -20,11 +20,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Subsystems.Transfer.Transfer;
 import frc.robot.Subsystems.Transfer.TransferIOReal;
+import frc.robot.Subsystems.Drive.Drive;
+import frc.robot.Subsystems.Drive.DriveIOReal;
 import frc.robot.Subsystems.NoteIntake.NoteIntake;
 import frc.robot.Subsystems.NoteIntake.NoteIntakeIOReal;
 import frc.robot.Subsystems.Shooter.Shooter;
 import frc.robot.POM_lib.Joysticks.PomXboxController;
 import frc.robot.Commands.TransferCommands;
+import frc.robot.Commands.DriveCommands;
 import frc.robot.Commands.NoteIntakeCommands;
 import frc.robot.Commands.ShooterCommands;
 import frc.robot.Subsystems.Shooter.ShooterIOReal;
@@ -55,6 +58,8 @@ public class RobotContainer {
   private Transfer transfer;
   private NoteIntake noteIntake;
   private Shooter shooter;
+  private Drive drive;
+  private DriveCommands driveCommands;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -63,6 +68,7 @@ public class RobotContainer {
     shooter = new Shooter(new ShooterIOReal());
     noteIntake = new NoteIntake(new NoteIntakeIOReal());
     transfer = new Transfer(new TransferIOReal());
+    drive = new Drive(new DriveIOReal());
 
     configureButtonBindings();
 

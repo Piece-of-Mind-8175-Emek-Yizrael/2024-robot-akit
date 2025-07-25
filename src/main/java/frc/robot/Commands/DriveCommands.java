@@ -14,9 +14,4 @@ public class DriveCommands extends Command {
         this.drive = drive;
     }
 
-    public Command arcadeDrive(DoubleSupplier xDoubleSupplier, DoubleSupplier yDoubleSupplier) {
-
-        return Commands.runEnd(null, null, drive);
-    }
-
 }
