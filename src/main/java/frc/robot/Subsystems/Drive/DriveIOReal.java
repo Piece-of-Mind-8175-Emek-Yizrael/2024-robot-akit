@@ -23,7 +23,7 @@ public class DriveIOReal implements DriveIO {
         rightLeader = new TalonFX(0);
         leftFollower = new VictorSPX(0);
         LeftLeader = new TalonFX(0);
-        // differentialDrive = new DifferentialDrive(null, null);
+        // differentialDrive = new DifferentialDrive(LeftLeader, rightLeader);
 
         // leftFollower.follow(LeftLeader);
         // rightFollower.follow(rightLeader);
