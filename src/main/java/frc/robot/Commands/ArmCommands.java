@@ -30,4 +30,10 @@ public class ArmCommands extends SubsystemBase {
 
     }
 
+    public Command armDownPIDWithFF() {
+        return new FunctionalCommand(() -> arm.getIO().resetPID(), () -> arm.getIO().setPIDWIithFF(0),
+                Interrupted -> arm.getIO().stopMotor(), () -> arm.getIO().atGoal(), arm).withName("PID with FF");
+
+    }
+
 }

@@ -97,7 +97,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     operatorController.a().onTrue(armCommands.runArmFF());
-    operatorController.b().onTrue(armCommands.runArmPIDWithFF(0));
+    operatorController.b().onTrue(armCommands.armDownPIDWithFF());
     operatorController.x().onTrue(armCommands.runArmPIDWithFF(0.8));
     operatorController.y().onTrue(armCommands.runArmPIDWithFF(1.2));
     operatorController.PovUp().whileTrue(armCommands.runArm(0.2));

@@ -47,4 +47,7 @@ public interface ArmIO {
    public default void setPIDvalues() {
    }
 
+   public default boolean ifPressed() {
+      return false;
+   }
 }

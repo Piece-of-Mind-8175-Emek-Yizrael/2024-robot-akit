@@ -108,6 +108,11 @@ public class ArmSparkMax implements ArmIO {
     }
 
     @Override
+    public boolean ifPressed() {
+        return !limitSwitch.get();
+    }
+
+    @Override
     public void setPIDvalues() {
         pidController.setPID(armTuning.getKp(), armTuning.getKi(), armTuning.getKd());
         pidController.setConstraints(
@@ -115,4 +120,5 @@ public class ArmSparkMax implements ArmIO {
         feedforward = new ArmFeedforward(armTuning.getKs(), armTuning.getKg(), armTuning.getKv(),
                 armTuning.getKa());
     }
+
 }

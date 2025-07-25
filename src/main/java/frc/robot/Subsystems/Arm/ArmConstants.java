@@ -11,7 +11,7 @@ public class ArmConstants {
     public final static double kD = 0;
     public final static double kA = 0;
     public final static double kS = 0.3;
-    public final static double kV = 3.7;
+    public final static double kV = 3.5;
     public final static double kG = 0.65;
 
     public final static double MAX_VOLTAGE = 0;
