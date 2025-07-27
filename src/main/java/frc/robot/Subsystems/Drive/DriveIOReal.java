@@ -1,30 +1,32 @@
 package frc.robot.Subsystems.Drive;
 
-import com.ctre.phoenix.motorcontrol.IMotorController;
+import static frc.robot.Subsystems.Drive.DriveConstants.leftFollowerCanId;
+import static frc.robot.Subsystems.Drive.DriveConstants.leftLeaderCanId;
+import static frc.robot.Subsystems.Drive.DriveConstants.rightFollowerCanId;
+import static frc.robot.Subsystems.Drive.DriveConstants.rightLeaderCanId;
+
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.configs.TalonFXConfigurator;
-import com.ctre.phoenix6.hardware.TalonFX;
-import static frc.robot.Subsystems.Drive.DriveConstants.*;
+import com.ctre.phoenix6.hardware.TalonFXS;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 
 public class DriveIOReal implements DriveIO {
 
-    public TalonFX rightLeader;
+    public TalonFXS rightLeader;
     public VictorSPX rightFollower;
-    public TalonFX LeftLeader;
+    public TalonFXS LeftLeader;
     public VictorSPX leftFollower;
     TalonFXConfiguration configuration;
     DifferentialDrive differentialDrive;
 
     public DriveIOReal() {
         rightFollower = new VictorSPX(rightFollowerCanId);
-        rightLeader = new TalonFX(rightLeaderCanId);
+        rightLeader = new TalonFXS(rightLeaderCanId);
         leftFollower = new VictorSPX(leftFollowerCanId);
-        LeftLeader = new TalonFX(leftLeaderCanId);
-        // differentialDrive = new DifferentialDrive(LeftLeader, rightLeader);
+        LeftLeader = new TalonFXS(leftLeaderCanId);
+        // differentialDrive = new DifferentialDrive(null, null)
 
         // leftFollower.follow(LeftLeader);
         // rightFollower.follow(rightLeader);
