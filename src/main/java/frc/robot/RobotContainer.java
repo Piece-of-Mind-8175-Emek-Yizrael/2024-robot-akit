@@ -89,12 +89,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    operatorController.rightTrigger().whileTrue(ShooterCommands.startEndShoot(shooter, ShooterConstants.SPEED));
-    operatorController.leftTrigger().whileTrue(TransferCommands.shoot(transfer));
-    drive.setDefaultCommand(DriveCommands.arcadeDrive(drive, driverController::getLeftY, driverController::getRightX));
-    operatorController.a().onTrue(NoteIntakeCommands.Intake(noteIntake).alongWith(TransferCommands.transfer(transfer)).until(()-> transfer.getTransferSensor()));
-    operatorController.y().onTrue(TransferCommands.stop(transfer).alongWith(NoteIntakeCommands.stop(noteIntake)));
-    //operatorController.a().onFalse(TransferCommands.reverseTransfer(transfer).withTimeout(0.25555));
+
   }
 
   /**

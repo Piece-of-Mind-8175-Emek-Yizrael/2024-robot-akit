@@ -8,24 +8,21 @@ import frc.robot.Subsystems.shooter.ShooterIO.ShooterIOInputs;
 
 public class Shooter extends SubsystemBase {
     public final ShooterIO shooterIO;
-    public final ShooterIOInputs inputs = new ShooterIO.ShooterIOInputs();
+    public final ShooterIOInputs inputs = new ShooterIOInputs();
 
     public Shooter(ShooterIO shooterIO) {
         this.shooterIO = shooterIO;
     }
 
-    public void setSpeed(double speed) {
-        shooterIO.setSpeed(speed);
-    }
-
-    public void stopMotor() {
-        shooterIO.stopMotor();
+    public ShooterIO getIO() {
+        return shooterIO;
     }
 
     @Override
     public void periodic() {
         shooterIO.updateInputs(inputs);
-        //Logger.processInputs("Shooter", inputs);
+        //Logger.processInputs("shooter inputs", inputs);
     }
+
 
 }
